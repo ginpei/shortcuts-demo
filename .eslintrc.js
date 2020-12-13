@@ -33,5 +33,6 @@ module.exports = {
       { devDependencies: ["**/*.test.{ts,tsx}"] },
     ],
     "import/prefer-default-export": "off",
+    "no-use-before-define": "off", // leave it to tsc
   },
 };
