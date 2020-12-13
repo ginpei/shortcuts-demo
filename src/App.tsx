@@ -1,10 +1,10 @@
 import React from "react";
-import { HomePage } from "./screens/HomePage";
+import { EditorPage } from "./screens/EditorPage";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <HomePage />
+      <EditorPage />
     </div>
   );
 };

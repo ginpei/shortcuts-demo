@@ -2,11 +2,11 @@ import { useCallback, useState } from "react";
 import { EditorCanvas } from "../components/EditorCanvas";
 import { EditorNotepad } from "../components/EditorNotepad";
 import { EditorSidebar } from "../components/EditorSidebar";
-import "./HomePage.scss";
+import "./EditorPage.scss";
 
 type FocusType = "" | "sidebar" | "canvas" | "notepad";
 
-export const HomePage: React.FC = () => {
+export const EditorPage: React.FC = () => {
   const [focus, setFocus] = useState<FocusType>("");
 
   const onLayoutPointerDown: React.PointerEventHandler<HTMLDivElement> = useCallback(
