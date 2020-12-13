@@ -1,3 +1,37 @@
 .HomePage {
-  color: tomato;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.HomePage-layout {
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    "sidebar canvas" 70%
+    "sidebar notepad" 30%
+    / 30% auto;
+  height: 100%;
+  width: 100%;
+}
+
+.HomePage-layoutItem {
+  opacity: 0.8; // 🤔
+  color: var(--color-moderate-fg);
+
+  &[data-focus="true"] {
+    opacity: 1;
+    color: var(--color-base-fg);
+  }
+}
+
+.HomePage-sidebar {
+  grid-area: sidebar;
+}
+
+.HomePage-canvas {
+  grid-area: canvas;
+}
+
+.HomePage-notepad {
+  grid-area: notepad;
 }
