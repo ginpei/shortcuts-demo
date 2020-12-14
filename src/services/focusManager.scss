@@ -1,0 +1,10 @@
+[data-focus-name] {
+  color: var(--color-moderate-fg);
+  filter: contrast(60%); // 🤔
+
+  &[data-focus] {
+    color: var(--color-base-fg);
+    filter: contrast(100%);
+  }
+
+}

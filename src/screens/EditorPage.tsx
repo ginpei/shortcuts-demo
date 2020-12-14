@@ -1,48 +1,33 @@
-import { useCallback, useState } from "react";
+import { useEffect } from "react";
 import { EditorCanvas } from "../components/EditorCanvas";
 import { EditorNotepad } from "../components/EditorNotepad";
 import { EditorSidebar } from "../components/EditorSidebar";
+import { useFocusManager } from "../services/focusManager";
 import "./EditorPage.scss";
 
 type FocusType = "" | "sidebar" | "canvas" | "notepad";
 
 export const EditorPage: React.FC = () => {
-  const [focus, setFocus] = useState<FocusType>("");
-
-  const onLayoutPointerDown: React.PointerEventHandler<HTMLDivElement> = useCallback(
-    (event) => {
-      const focusType = event.currentTarget.getAttribute(
-        "data-focus-type"
-      ) as FocusType;
-      setFocus(focusType);
-    },
-    [setFocus]
-  );
+  const [focusName] = useFocusManager();
 
   return (
     <div className="HomePage">
       <div className="HomePage-layout">
         <div
           className="HomePage-layoutItem HomePage-sidebar"
-          data-focus-type="sidebar"
-          data-focus={focus === "sidebar"}
-          onPointerDown={onLayoutPointerDown}
+          data-focus-name="sidebar"
         >
           <EditorSidebar />
         </div>
         <div
           className="HomePage-layoutItem HomePage-canvas"
-          data-focus-type="canvas"
-          data-focus={focus === "canvas"}
-          onPointerDown={onLayoutPointerDown}
+          data-focus-name="canvas"
         >
           <EditorCanvas />
         </div>
         <div
           className="HomePage-layoutItem HomePage-notepad"
-          data-focus-type="notepad"
-          data-focus={focus === "notepad"}
-          onPointerDown={onLayoutPointerDown}
+          data-focus-name="notepad"
         >
           <EditorNotepad />
         </div>

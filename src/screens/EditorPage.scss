@@ -14,16 +14,6 @@
   width: 100%;
 }
 
-.HomePage-layoutItem {
-  color: var(--color-moderate-fg);
-  filter: contrast(60%); // 🤔
-
-  &[data-focus="true"] {
-    color: var(--color-base-fg);
-    filter: contrast(100%);
-  }
-}
-
 .HomePage-sidebar {
   grid-area: sidebar;
 }
