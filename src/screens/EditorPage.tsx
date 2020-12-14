@@ -1,14 +1,29 @@
-import { useEffect } from "react";
 import { EditorCanvas } from "../components/EditorCanvas";
 import { EditorNotepad } from "../components/EditorNotepad";
 import { EditorSidebar } from "../components/EditorSidebar";
 import { useFocusManager } from "../services/focusManager";
+import {
+  KeyboardShortcut,
+  useKeyboardShortcuts,
+} from "../services/keyboardManager";
 import "./EditorPage.scss";
 
-type FocusType = "" | "sidebar" | "canvas" | "notepad";
+const keyboardShortcuts: readonly KeyboardShortcut[] = [
+  {
+    command: "sayHello",
+    keyBind: [
+      {
+        key: "A",
+        ctrlKey: true,
+      },
+    ],
+    when: ["sidebar"],
+  },
+];
 
 export const EditorPage: React.FC = () => {
   const [focusName] = useFocusManager();
+  useKeyboardShortcuts(keyboardShortcuts, focusName);
 
   return (
     <div className="HomePage">
