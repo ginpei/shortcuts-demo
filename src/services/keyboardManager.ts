@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Command } from "./commandManager";
 
 export interface KeyboardShortcut {
   command: string;
@@ -15,6 +16,7 @@ export interface KeyboardCombination {
 
 export function useKeyboardShortcuts(
   shortcuts: readonly KeyboardShortcut[],
+  commands: Command[],
   focusName: string,
   targetWindow = window
 ): void {
@@ -31,7 +33,11 @@ export function useKeyboardShortcuts(
       }
 
       event.preventDefault();
-      console.log("# matched.command", matched.command);
+      const command = commands.find((v) => v.name === matched.command);
+      if (!command) {
+        throw new Error(`Command "${matched.command}" not found`);
+      }
+      command.function();
     }
   }, [shortcuts, focusName, targetWindow]);
 }

@@ -1,6 +1,7 @@
 import { EditorCanvas } from "../components/EditorCanvas";
 import { EditorNotepad } from "../components/EditorNotepad";
 import { EditorSidebar } from "../components/EditorSidebar";
+import { Command } from "../services/commandManager";
 import { useFocusManager } from "../services/focusManager";
 import {
   KeyboardShortcut,
@@ -21,9 +22,16 @@ const keyboardShortcuts: readonly KeyboardShortcut[] = [
   },
 ];
 
+const commands: Command[] = [
+  {
+    function: () => window.alert("Hello in sidebar!"),
+    name: "sayHello",
+  },
+];
+
 export const EditorPage: React.FC = () => {
   const [focusName] = useFocusManager();
-  useKeyboardShortcuts(keyboardShortcuts, focusName);
+  useKeyboardShortcuts(keyboardShortcuts, commands, focusName);
 
   return (
     <div className="HomePage">
