@@ -1,3 +1,22 @@
 .EditorCanvas {
-  background-color: #0903;
+  display: grid;
+  grid-template:
+    "canvas" auto
+    "toolbar" 2rem
+    / auto;
+  height: 100%;
+}
+
+.EditorCanvas-canvasContainer {
+  background-color: lightgray;
+  overflow: scroll;
+  padding: 1rem;
+}
+
+.EditorCanvas-canvas {
+  box-shadow: 0 0 1rem #000;
+}
+
+.EditorCanvas-toolbar {
+  display: flex;
 }
