@@ -6,6 +6,8 @@ export interface Note {
   updatedAt: number;
 }
 
+export type NoteCallback = (note: Note) => void;
+
 export function createNote(init?: Partial<Note>): Note {
   return {
     ...init,

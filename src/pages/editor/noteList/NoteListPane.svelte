@@ -1,6 +1,14 @@
 <script lang="ts">
+  import type { Note } from "src/domains/notes/Note";
   import { editorPageStateStore } from "../editorPageStateStore";
   import FileListItem from "./NoteListtem.svelte";
+
+  function onNoteSelect(note: Note) {
+    editorPageStateStore.update((values) => ({
+      ...values,
+      selectedNoteId: note.id
+    }));
+  }
 </script>
 
 <section class="FileListPane">
@@ -10,6 +18,7 @@
       <div class="item">
         <FileListItem
           note={note}
+          onSelect={onNoteSelect}
           selected={note.id === $editorPageStateStore.selectedNoteId}
         />
       </div>
