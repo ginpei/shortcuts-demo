@@ -1,4 +1,4 @@
-export interface FileItem {
+export interface Note {
   body: string;
   createdAt: number;
   id: string;
@@ -6,7 +6,7 @@ export interface FileItem {
   updatedAt: number;
 }
 
-export function createFileItem(init?: Partial<FileItem>): FileItem {
+export function createNote(init?: Partial<Note>): Note {
   return {
     ...init,
     body: init?.body ?? '',

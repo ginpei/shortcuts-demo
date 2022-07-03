@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { FileItem } from "src/domains/fileItems/FileItem";
+  import type { Note } from "src/domains/notes/Note";
 
-  export let fileItem: FileItem;
+  export let note: Note;
   export let selected: boolean;
 </script>
 
@@ -10,7 +10,7 @@
   class:selected={selected}
 >
   <div class="title">
-    <span>{fileItem.title}</span>
+    <span>{note.title}</span>
   </div>
 </div>
 

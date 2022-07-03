@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { getFileList } from "./fileListData";
-  import FileListItem from "./FileListItem.svelte";
+  import { getNotes } from "./noteData";
+  import FileListItem from "./NoteListtem.svelte";
 
-  const fileList = getFileList();
+  const notes = getNotes();
 
-  let selectedFileItemId = fileList[0].id;
+  let selectedFileItemId = notes[0].id;
 </script>
 
 <section class="FileListPane">
   <h1 class="heading">File list</h1>
   <div class="list">
-    {#each fileList as fileItem}
+    {#each notes as note}
       <div class="item">
         <FileListItem
-          {fileItem}
-          selected={fileItem.id === selectedFileItemId}
+          note={note}
+          selected={note.id === selectedFileItemId}
         />
       </div>
     {/each}
