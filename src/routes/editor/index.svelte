@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { loadUserNotes } from "../../domains/notes/userNotesStore";
+  import { initEditorPageStateStore } from "../../pages/editor/editorPageStateStore";
   import EditorPage from "../../pages/editor/EditorPage.svelte";
 
   onMount(async () => {
-    loadUserNotes();
+    initEditorPageStateStore();
   });
 </script>
 
