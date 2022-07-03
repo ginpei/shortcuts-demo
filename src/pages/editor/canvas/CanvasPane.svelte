@@ -47,6 +47,7 @@
   <input
     class="title"
     disabled={!Boolean(note)}
+    id="note-title"
     name="title"
     on:input={onInput}
     type="text"
@@ -55,6 +56,7 @@
   <textarea
     class="text"
     disabled={!Boolean(note)}
+    id="note-body"
     name="body"
     on:input={onInput}
     value={body}

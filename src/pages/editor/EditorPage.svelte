@@ -1,8 +1,64 @@
 <script lang="ts">
+import { onDestroy, onMount } from "svelte";
+
+  import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcuts";
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
+
+  let offShortcuts: (() => void) | null = null;
+
+  onMount(() => {
+    offShortcuts = startKeyboardShortcuts(
+      [
+        {
+          action: () => {
+            const el = document.querySelector("#note-body");
+            if (el instanceof HTMLElement) {
+              el.focus();
+            }
+          },
+          command: "forucsNoteBody",
+        },
+        {
+          action: () => {
+            const el = document.querySelector("#note-title");
+            if (el instanceof HTMLElement) {
+              el.focus();
+            }
+          },
+          command: "forucsNoteTitle",
+        },
+        {
+          action: () => console.log(`# OK`),
+          command: "forucsFileListPane",
+        },
+      ],
+      [
+        {
+          command: "forucsFileListPane",
+          key: ["Ctrl+Shift+E"],
+          title: "Focus file list pane",
+          when: "",
+        },
+        {
+          command: "forucsNoteBody",
+          key: ["Ctrl+1"],
+          title: "Focus note body",
+          when: "",
+        },
+        {
+          command: "forucsNoteTitle",
+          key: ["Ctrl+0"],
+          title: "Focus note title",
+          when: "",
+        },
+      ]
+    );
+  });
+
+  onDestroy(() => offShortcuts?.());
 </script>
 
 <div class="EditorPage">
