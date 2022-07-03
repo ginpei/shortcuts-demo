@@ -42,3 +42,10 @@ export function setNoteState(note: Note): void {
     return values;
   });
 }
+
+export function addNoteState(note: Note): void {
+  editorPageStateStore.update((values) => {
+    values.notes.push(note);
+    return values;
+  });
+}

@@ -1,6 +1,17 @@
 <script lang="ts">
+  import { createNote } from "../../../domains/notes/Note";
+  import { addNoteState } from "../editorPageStateStore";
   import Logo from "./Logo.svelte";
   import ToolbarButton from "./ToolbarButton.svelte";
+
+  function onCreateClick() {
+    const note = createNote({
+      id: Math.random().toFixed(32).slice(2),
+      title: "New note",
+    });
+
+    addNoteState(note);
+  }
 </script>
 
 <div class="ToolbarPane">
@@ -12,7 +23,7 @@
       <ToolbarButton>💬</ToolbarButton>
     </div>
     <div class="secondary">
-      <ToolbarButton>➕</ToolbarButton>
+      <ToolbarButton onClick={onCreateClick}>➕</ToolbarButton>
       <ToolbarButton>🔍</ToolbarButton>
     </div>
   </div>

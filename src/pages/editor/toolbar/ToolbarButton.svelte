@@ -1,11 +1,18 @@
 <script lang="ts">
+  export let onClick: (() => void) | undefined = undefined;
 </script>
 
-<span class="ToolbarButton">
+<button class="ToolbarButton" on:click={onClick}>
   <slot />
-</span>
+</button>
 
 <style lang="scss">
+  button {
+    background-color: transparent;
+    border-style: none;
+    color: currentColor;
+  }
+
   .ToolbarButton {
     display: grid;
     place-items: center;

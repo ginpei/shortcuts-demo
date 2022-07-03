@@ -6,7 +6,6 @@
   let text = "";
 
   editorPageStateStore.subscribe(({ notes, selectedNoteId }) => {
-    console.log('# selectedNoteId', selectedNoteId);
     const newNote = notes.find((v) => v.id === selectedNoteId);
     if (!newNote) {
       note = null;
@@ -34,6 +33,7 @@
   <textarea
     bind:value={text}
     class="text"
+    disabled={!Boolean(note)}
     on:input={onInput}
   />
 </div>
@@ -48,5 +48,9 @@
     font-size: 18px;
     padding: 8px;
     resize: none;
+
+    &:disabled {
+      background-color: #fcfcfc;
+    }
   }
 </style>
