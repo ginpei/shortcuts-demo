@@ -1,25 +1,13 @@
-<script context="module" lang="ts">
-  import type { Note } from "src/domains/notes/Note";
-
-  export interface EditorPageProps {
-    notes: Note[];
-  }
-</script>
-
 <script lang="ts">
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
-
-  export let props: EditorPageProps;
 </script>
 
 <div class="EditorPage">
   <div class="pane" style="grid-area: toolbar"><ToolbarPane /></div>
-  <div class="pane" style="grid-area: list">
-    <FileListPane notes={props.notes} />
-  </div>
+  <div class="pane" style="grid-area: list"><FileListPane /></div>
   <div class="pane" style="grid-area: canvas"><CanvasPane /></div>
 </div>
 

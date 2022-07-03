@@ -1,10 +1,18 @@
 <script lang="ts">
   import type { Note } from "src/domains/notes/Note";
+  import { userNotesStore } from "../../../domains/notes/userNotesStore";
   import FileListItem from "./NoteListtem.svelte";
 
-  export let notes: Note[];
+  let notes: Note[];
+  let selectedFileItemId = "";
 
-  let selectedFileItemId = notes[0]?.id ?? "";
+  userNotesStore.subscribe((newNotes) => {
+    notes = newNotes;
+
+    if (selectedFileItemId === "" && notes.length > 0) {
+      selectedFileItemId = notes[0].id;
+    }
+  });
 </script>
 
 <section class="FileListPane">
