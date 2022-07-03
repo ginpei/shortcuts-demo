@@ -20,7 +20,7 @@
       / 20rem auto;
     height: 100vh;
     overflow: hidden;
-    width: 100vh;
+    width: 100vw;
   }
 
   .pane {
