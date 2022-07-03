@@ -2,7 +2,7 @@
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import FileListPane from "./fileList/FileListPane.svelte";
-  import ToolbarPane from "./ToolbarPane.svelte";
+  import ToolbarPane from "./toolbar/ToolbarPane.svelte";
 </script>
 
 <div class="EditorPage">
