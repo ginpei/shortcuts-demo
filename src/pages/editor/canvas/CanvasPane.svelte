@@ -5,19 +5,19 @@
 
   let note: Note | null = null;
   let title = "";
-  let text = "";
+  let body = "";
 
   editorPageStateStore.subscribe(({ notes, selectedNoteId }) => {
     const newNote = notes.find((v) => v.id === selectedNoteId);
     if (!newNote) {
       note = null;
-      text = "";
+      body = "";
       return;
     }
 
     note = newNote;
     title = newNote.title;
-    text = newNote.body;
+    body = newNote.body;
   });
 
   function onInput(event: NiceInputEvent) {
@@ -52,7 +52,7 @@
     type="text"
   />
   <textarea
-    value={text}
+    value={body}
     class="text"
     disabled={!Boolean(note)}
     name="body"
