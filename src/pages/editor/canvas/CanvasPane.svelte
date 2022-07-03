@@ -45,18 +45,18 @@
 
 <div class="CanvasPane">
   <input
-    value={title}
     class="title"
     name="title"
     on:input={onInput}
     type="text"
+    value={title}
   />
   <textarea
-    value={body}
     class="text"
     disabled={!Boolean(note)}
     name="body"
     on:input={onInput}
+    value={body}
   />
 </div>
 
