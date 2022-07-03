@@ -5,6 +5,7 @@ export async function getUserNotes(): Promise<Note[]> {
   const notes: Note[] = [];
   for (let i = 0; i < n; i++) {
     const item = createNote({
+      body: `Item ${i + 1}`,
       id: Math.random().toFixed(32).slice(2),
       title: `Item ${i + 1}`,
     });
