@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { Note } from "src/domains/notes/Note";
-  import { editorPageStateStore, setNoteState } from "../editorPageStateStore";
+  import type { NiceInputEvent } from "src/misc/dom";
+  import { editorPageStateStore,setNoteState } from "../editorPageStateStore";
 
   let note: Note | null = null;
+  let title = "";
   let text = "";
 
   editorPageStateStore.subscribe(({ notes, selectedNoteId }) => {
@@ -14,26 +16,46 @@
     }
 
     note = newNote;
+    title = newNote.title;
     text = newNote.body;
   });
 
-  function onInput() {
+  function onInput(event: NiceInputEvent) {
     if (!note) {
       throw new Error("Note gone");
     }
 
-    setNoteState({
-      ...note,
-      body: text,
-    });
+    const { name, value } = event.currentTarget;
+
+    if (name === "body") {
+      setNoteState({
+        ...note,
+        body: value,
+      });
+    } else if (name === "title") {
+      setNoteState({
+        ...note,
+        title: value,
+      });
+    } else {
+      throw new Error(`Unknown input name: ${name}`);
+    }
   }
 </script>
 
 <div class="CanvasPane">
+  <input
+    value={title}
+    class="title"
+    name="title"
+    on:input={onInput}
+    type="text"
+  />
   <textarea
-    bind:value={text}
+    value={text}
     class="text"
     disabled={!Boolean(note)}
+    name="body"
     on:input={onInput}
   />
 </div>
@@ -41,6 +63,11 @@
 <style lang="scss">
   .CanvasPane {
     display: grid;
+    grid-template-rows: 48px auto;
+  }
+
+  .title {
+    font-size: 40px;
   }
 
   .text {
