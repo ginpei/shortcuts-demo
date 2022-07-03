@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Note } from "src/domains/notes/Note";
-  import { editorPageStateStore } from "../editorPageStateStore";
+  import { editorPageStateStore, setNoteState } from "../editorPageStateStore";
 
   let note: Note | null = null;
   let text = "";
@@ -19,24 +19,13 @@
   });
 
   function onInput() {
-    editorPageStateStore.update((values) => {
-      if (!note) {
-        throw new Error("Note gone");
-      }
+    if (!note) {
+      throw new Error("Note gone");
+    }
 
-      const noteId = note.id;
-      const index = values.notes.findIndex((v) => v.id === noteId);
-      if (index < 0) {
-        throw new Error("Note gone");
-      }
-
-      const newNote = {
-        ...note,
-        body: text,
-      };
-      values.notes[index] = newNote;
-
-      return values;
+    setNoteState({
+      ...note,
+      body: text,
     });
   }
 </script>

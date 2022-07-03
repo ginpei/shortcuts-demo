@@ -29,3 +29,16 @@ export function setEditorPageNotes(notes: Note[]) {
     });
   });
 }
+
+export function setNoteState(note: Note): void {
+  editorPageStateStore.update((values) => {
+    const index = values.notes.findIndex((v) => v.id === note.id);
+    if (index < 0) {
+      throw new Error("Note gone");
+    }
+
+    values.notes[index] = note;
+
+    return values;
+  });
+}
