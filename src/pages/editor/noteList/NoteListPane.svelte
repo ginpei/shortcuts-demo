@@ -9,8 +9,8 @@
   userNotesStore.subscribe((newNotes) => {
     notes = newNotes;
 
-    if (selectedFileItemId === "" && notes.length > 0) {
-      selectedFileItemId = notes[0].id;
+    if (!notes.some((v) => selectedFileItemId === v.id)) {
+      selectedFileItemId = "";
     }
   });
 </script>
