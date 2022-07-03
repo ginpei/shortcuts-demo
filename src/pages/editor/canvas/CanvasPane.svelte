@@ -46,6 +46,7 @@
 <div class="CanvasPane">
   <input
     class="title"
+    disabled={!Boolean(note)}
     name="title"
     on:input={onInput}
     type="text"
