@@ -1,7 +1,7 @@
 <script lang="ts">
   import CanvasPane from "./CanvasPane.svelte";
   import "./EditorPage.scss";
-  import FileListPane from "./FileListPane.svelte";
+  import FileListPane from "./fileList/FileListPane.svelte";
   import ToolbarPane from "./ToolbarPane.svelte";
 </script>
 
@@ -25,5 +25,6 @@
 
   .pane {
     display: grid;
+    overflow: hidden;
   }
 </style>
