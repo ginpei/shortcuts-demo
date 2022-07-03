@@ -1,6 +1,6 @@
-import { createNote, type Note } from "../../../domains/notes/Note";
+import { createNote, type Note } from "./Note";
 
-export function getNotes(): Note[] {
+export async function loadUserNotes(): Promise<Note[]> {
   const n = 100;
   const notes: Note[] = [];
   for (let i = 0; i < n; i++) {

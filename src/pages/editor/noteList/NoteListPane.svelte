@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { getNotes } from "./noteData";
+  import type { Note } from "src/domains/notes/Note";
   import FileListItem from "./NoteListtem.svelte";
 
-  const notes = getNotes();
+  export let notes: Note[];
 
-  let selectedFileItemId = notes[0].id;
+  let selectedFileItemId = notes[0]?.id ?? "";
 </script>
 
 <section class="FileListPane">
