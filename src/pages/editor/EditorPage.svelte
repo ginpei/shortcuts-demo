@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CanvasPane from "./CanvasPane.svelte";
+  import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import FileListPane from "./fileList/FileListPane.svelte";
   import ToolbarPane from "./ToolbarPane.svelte";
