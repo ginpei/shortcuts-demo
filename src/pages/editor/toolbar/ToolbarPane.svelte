@@ -31,8 +31,8 @@
 
 <style lang="scss">
   .ToolbarPane {
-    --toolbar--background-color--hover: #333;
-    --toolbar--background-color: black;
+    --toolbar--background-color--hover: hsl(210deg 90% 30%);
+    --toolbar--background-color: #036;
     --toolbar--color: white;
     background-color: var(--toolbar--background-color);
     color: var(--toolbar--color);
