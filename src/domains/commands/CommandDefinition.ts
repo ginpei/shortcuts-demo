@@ -15,3 +15,13 @@ export function createCommandDefinition<T extends string>(
     title: init?.title ?? "",
   };
 }
+
+/**
+ * To infer `T` because `key: CommandDefinition[]` nor
+ * `[] as CommandDefinition[]` does not work.
+ */
+export function toCommandDefinitions<T extends string>(
+  defs: CommandDefinition<T>[]
+): CommandDefinition<T>[] {
+  return defs;
+}
