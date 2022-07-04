@@ -1,9 +1,12 @@
 import type { CommandDefinition } from "../commands/CommandDefinition";
 import type { KeyboardShortcut } from "./KeyboardShortcut";
 
-export function startKeyboardShortcuts<Command extends string>(
+export function startKeyboardShortcuts<
+  Command extends string,
+  AssignedCommand extends Command
+>(
   commands: readonly CommandDefinition<Command>[],
-  keyAssignments: readonly KeyboardShortcut<Command>[],
+  keyAssignments: readonly KeyboardShortcut<AssignedCommand>[],
 ): () => void {
   const f = onKeyDown.bind(null, commands, keyAssignments);
   document.addEventListener("keydown", f);
