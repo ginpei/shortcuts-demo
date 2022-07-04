@@ -4,6 +4,7 @@
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import { editorPageCommands } from "./editorPageCommands";
+  import { editorPageShortcuts } from "./editorPageShortcuts";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
 
@@ -12,23 +13,7 @@
   onMount(() => {
     offShortcuts = startKeyboardShortcuts(
       editorPageCommands,
-      [
-        {
-          command: "forucsFileListPane",
-          key: ["Ctrl+Shift+E"],
-          when: "",
-        },
-        {
-          command: "forucsNoteBody",
-          key: ["Ctrl+1"],
-          when: "",
-        },
-        {
-          command: "forucsNoteTitle",
-          key: ["Ctrl+0"],
-          when: "",
-        },
-      ]
+      editorPageShortcuts
     );
   });
 
