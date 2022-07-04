@@ -8,7 +8,7 @@ export const editorPageCommands = toCommandDefinitions([
         el.focus();
       }
     },
-    command: "forucsNoteBody",
+    command: "focusNoteBody",
     title: "Focus note body",
   },
   {
@@ -18,12 +18,12 @@ export const editorPageCommands = toCommandDefinitions([
         el.focus();
       }
     },
-    command: "forucsNoteTitle",
+    command: "focusNoteTitle",
     title: "Focus note title",
   },
   {
     action: () => console.log(`# OK`),
-    command: "forucsFileListPane",
+    command: "focusFileListPane",
     title: "Focus file list pane",
   },
 ]);

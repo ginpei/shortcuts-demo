@@ -2,17 +2,17 @@ import type { KeyboardShortcut } from "src/domains/keyboard/KeyboardShortcut";
 
 export const editorPageShortcuts = toShortcutDefinitions([
   {
-    command: "forucsFileListPane",
+    command: "focusFileListPane",
     key: ["Ctrl+Shift+E"],
     when: "",
   },
   {
-    command: "forucsNoteBody",
+    command: "focusNoteBody",
     key: ["Ctrl+1"],
     when: "",
   },
   {
-    command: "forucsNoteTitle",
+    command: "focusNoteTitle",
     key: ["Ctrl+0"],
     when: "",
   },
