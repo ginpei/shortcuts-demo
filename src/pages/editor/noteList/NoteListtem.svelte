@@ -4,6 +4,7 @@
   export let note: Note;
   export let selected: boolean;
   export let onSelect: NoteCallback;
+  export let focus: boolean = false;
 
   function onClick() {
     onSelect(note);
@@ -11,9 +12,11 @@
 </script>
 
 <div
-  class="FileItem"
+  class:focus={focus}
   class:selected={selected}
+  class="FileItem"
   on:click={onClick}
+  tabindex="0"
 >
   <div class="title">
     <span>{note.title}</span>
@@ -23,6 +26,12 @@
 <style lang="scss">
   .FileItem {
     padding: 8px;
+
+    &:focus,
+    &.focus {
+      outline-offset: -1px;
+      outline: thin solid blue;
+    }
 
     &.selected {
       color: tomato;

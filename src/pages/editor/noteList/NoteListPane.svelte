@@ -13,7 +13,7 @@
 
 <section class="FileListPane">
   <h1 class="heading">File list</h1>
-  <div class="list">
+  <div class="list" id="noteList-list">
     {#each $editorPageStateStore.notes as note}
       <div class="item">
         <FileListItem

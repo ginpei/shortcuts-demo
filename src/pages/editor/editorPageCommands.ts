@@ -22,7 +22,12 @@ export const editorPageCommands = toCommandDefinitions([
     title: "Focus note title",
   },
   {
-    action: () => console.log(`# OK`),
+    action() {
+      const el = document.querySelector("#noteList-list [tabindex]");
+      if (el instanceof HTMLElement) {
+        el.focus();
+      }
+    },
     command: "focusFileListPane",
     title: "Focus file list pane",
   },
