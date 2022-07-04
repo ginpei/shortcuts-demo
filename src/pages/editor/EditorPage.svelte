@@ -16,19 +16,16 @@
         {
           command: "forucsFileListPane",
           key: ["Ctrl+Shift+E"],
-          title: "Focus file list pane",
           when: "",
         },
         {
           command: "forucsNoteBody",
           key: ["Ctrl+1"],
-          title: "Focus note body",
           when: "",
         },
         {
           command: "forucsNoteTitle",
           key: ["Ctrl+0"],
-          title: "Focus note title",
           when: "",
         },
       ]
