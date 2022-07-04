@@ -1,9 +1,9 @@
 <script lang="ts">
-import { onDestroy, onMount } from "svelte";
-
+  import { onDestroy,onMount } from "svelte";
   import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcuts";
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
+  import { editorPageCommands } from "./editorPageCommands";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
 
@@ -11,30 +11,7 @@ import { onDestroy, onMount } from "svelte";
 
   onMount(() => {
     offShortcuts = startKeyboardShortcuts(
-      [
-        {
-          action: () => {
-            const el = document.querySelector("#note-body");
-            if (el instanceof HTMLElement) {
-              el.focus();
-            }
-          },
-          command: "forucsNoteBody",
-        },
-        {
-          action: () => {
-            const el = document.querySelector("#note-title");
-            if (el instanceof HTMLElement) {
-              el.focus();
-            }
-          },
-          command: "forucsNoteTitle",
-        },
-        {
-          action: () => console.log(`# OK`),
-          command: "forucsFileListPane",
-        },
-      ],
+      editorPageCommands,
       [
         {
           command: "forucsFileListPane",
