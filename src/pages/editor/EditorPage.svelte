@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy,onMount } from "svelte";
-  import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcuts";
+  import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcutHandlers";
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
   import { editorPageCommands } from "./editorPageCommands";
