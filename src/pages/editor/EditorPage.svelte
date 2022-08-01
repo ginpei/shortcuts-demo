@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { Action } from "svelte/types/runtime/action";
   import { execCommand } from "../../domains/commands/commands";
-  import { onDestroy,onMount } from "svelte";
   import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcutHandlers";
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import "./EditorPage.scss";
@@ -10,17 +10,19 @@
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
 
-  let offShortcuts: (() => void) | null = null;
-
-  onMount(() => {
-    offShortcuts = startKeyboardShortcuts(
+  const onUse: Action = () => {
+    const offShortcuts = startKeyboardShortcuts(
       editorPageCommands,
       editorPageShortcuts,
       () => getEditorPageState().focus,
     );
-  });
 
-  onDestroy(() => offShortcuts?.());
+    return {
+      destroy() {
+        offShortcuts();
+      },
+    };
+  }
 
   function onCommand(event: CustomEvent) {
     if (event.type !== 'app-command') {
@@ -31,7 +33,7 @@
   }
 </script>
 
-<div class="EditorPage">
+<div class="EditorPage" use:onUse>
   <div class="pane" style="grid-area: toolbar"><ToolbarPane /></div>
   <div class="pane" style="grid-area: list">
     <FileListPane on:app-command={onCommand} />
