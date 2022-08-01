@@ -18,11 +18,26 @@
   });
 
   onDestroy(() => offShortcuts?.());
+
+  function onCommand(event: CustomEvent) {
+    if (event.type !== 'command') {
+      throw new Error(`Expected event type 'command', got ${event.type}`);
+    }
+
+    const { command } = event.detail;
+    const def = editorPageCommands.find((v) => v.command === command);
+    if (!def) {
+      throw new Error(`Unknown command ${command}`);
+    }
+    def.action();
+  }
 </script>
 
 <div class="EditorPage">
   <div class="pane" style="grid-area: toolbar"><ToolbarPane /></div>
-  <div class="pane" style="grid-area: list"><FileListPane /></div>
+  <div class="pane" style="grid-area: list">
+    <FileListPane on:command={onCommand} />
+  </div>
   <div class="pane" style="grid-area: canvas"><CanvasPane /></div>
 </div>
 

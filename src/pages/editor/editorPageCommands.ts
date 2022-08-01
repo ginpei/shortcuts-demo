@@ -1,6 +1,7 @@
 import { toCommandDefinitions } from "../../domains/commands/CommandDefinition";
+import { noteListCommands } from "./noteList/noteListCommands";
 
-export const editorPageCommands = toCommandDefinitions([
+const editorPageTopCommands = toCommandDefinitions([
   {
     action: () => {
       const el = document.querySelector("#note-body");
@@ -21,14 +22,9 @@ export const editorPageCommands = toCommandDefinitions([
     command: "focusNoteTitle",
     title: "Focus note title",
   },
-  {
-    action() {
-      const el = document.querySelector("#noteList-list [tabindex]");
-      if (el instanceof HTMLElement) {
-        el.focus();
-      }
-    },
-    command: "focusFileListPane",
-    title: "Focus file list pane",
-  },
 ]);
+
+export const editorPageCommands = [
+  ...editorPageTopCommands,
+  ...noteListCommands,
+];

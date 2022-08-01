@@ -1,16 +1,26 @@
 import type { Note } from "src/domains/notes/Note";
 import { getUserNotes } from "../../domains/notes/noteDb";
-import { writable } from "svelte/store";
+import { get, writable } from "svelte/store";
 
 export interface EditorPageState {
+  focusedNoteId: string;
   notes: Note[];
   selectedNoteId: string;
 }
 
-export const editorPageStateStore = writable<EditorPageState>({
-  notes: [],
-  selectedNoteId: "",
-});
+export const editorPageStateStore = writable<EditorPageState>(createEditorPageState());
+
+export function getEditorPageState(): Readonly<EditorPageState> {
+  return get(editorPageStateStore);
+}
+
+export function createEditorPageState(): EditorPageState {
+  return {
+    focusedNoteId: "",
+    notes: [],
+    selectedNoteId: "",
+  };
+}
 
 export async function initEditorPageStateStore() {
   const notes = await getUserNotes();
@@ -19,11 +29,17 @@ export async function initEditorPageStateStore() {
 
 export function setEditorPageNotes(notes: Note[]) {
   editorPageStateStore.update((values) => {
+    const focusedNoteId = notes.some((v) => values.focusedNoteId === v.id)
+      ? values.focusedNoteId
+      : "";
+
     const selectedNoteId = notes.some((v) => values.selectedNoteId === v.id)
       ? values.selectedNoteId
       : "";
 
     return ({
+      ...values,
+      focusedNoteId,
       notes,
       selectedNoteId,
     });

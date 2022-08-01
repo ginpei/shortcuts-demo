@@ -16,7 +16,6 @@
   class:selected={selected}
   class="FileItem"
   on:click={onClick}
-  tabindex="0"
 >
   <div class="title">
     <span>{note.title}</span>
