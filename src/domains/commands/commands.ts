@@ -6,7 +6,7 @@ export function execCommand<T extends string>(
 ): void {
   const def = commands.find((v) => v.command === command);
   if (!def) {
-    return;
+    throw new Error(`Unknown command ${command}`);
   }
 
   def.action();

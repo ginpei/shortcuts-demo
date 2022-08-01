@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { execCommand } from "../../domains/commands/commands";
   import { onDestroy,onMount } from "svelte";
   import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcutHandlers";
   import CanvasPane from "./canvas/CanvasPane.svelte";
@@ -24,12 +25,7 @@
       throw new Error(`Expected event type 'command', got ${event.type}`);
     }
 
-    const { command } = event.detail;
-    const def = editorPageCommands.find((v) => v.command === command);
-    if (!def) {
-      throw new Error(`Unknown command ${command}`);
-    }
-    def.action();
+    execCommand(editorPageCommands, event.detail.command);
   }
 </script>
 
