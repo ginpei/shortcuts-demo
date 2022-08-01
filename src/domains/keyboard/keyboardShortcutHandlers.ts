@@ -1,4 +1,5 @@
 import type { CommandDefinition } from "../commands/CommandDefinition";
+import { toKeyCombination } from "./keyboardEventHandlers";
 import type { KeyboardShortcut } from "./KeyboardShortcut";
 
 export function startKeyboardShortcuts<
@@ -23,34 +24,29 @@ function onKeyDown<Command extends string>(
   }
 
   const keyCombination = toKeyCombination(event);
-  const candidates = keyAssignments.filter((v) => v.key.includes(keyCombination));
-
-  for (const def of candidates) {
-    const commandDef = commands.find((v) => v.command === def.command);
-    if (commandDef) {
-      commandDef.action();
-      return;
-    }
+  const matchedCommands = findMatchedCommands(keyCombination, commands, keyAssignments)
+  for (const command of matchedCommands) {
+    command.action();
   }
 }
 
-function toKeyCombination(event: KeyboardEvent): string {
-  const {
-    altKey,
-    ctrlKey,
-    metaKey,
-    shiftKey,
-    key,
-  } = event;
+function findMatchedCommands<Command extends string>(
+  keyCombination: string,
+  commands: readonly Readonly<CommandDefinition<Command>>[],
+  keyAssignments: readonly Readonly<KeyboardShortcut<Command>>[],
+): CommandDefinition<Command>[] {
+  const matchedCommands: CommandDefinition<Command>[] = [];
 
-  const keyCombination = [
-    ctrlKey || metaKey ? "Ctrl+" : "",
-    altKey ? "Alt+" : "",
-    shiftKey ? "Shift+" : "",
-    key,
-  ]
-    .filter((v) => Boolean(v))
-    .join("");
+  for (const keyAssignment of keyAssignments) {
+    if (!keyAssignment.key.includes(keyCombination)) {
+      continue;
+    }
 
-  return keyCombination;
+    const commandDef = commands.find((v) => v.command === keyAssignment.command);
+    if (commandDef) {
+      matchedCommands.push(commandDef);
+    }
+  }
+
+  return matchedCommands;
 }
