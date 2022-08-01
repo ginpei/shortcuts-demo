@@ -6,8 +6,8 @@ export function startKeyboardShortcuts<
   Command extends string,
   AssignedCommand extends Command
 >(
-  commands: readonly CommandDefinition<Command>[],
-  keyAssignments: readonly KeyboardShortcut<AssignedCommand>[],
+  commands: readonly Readonly<CommandDefinition<Command>>[],
+  keyAssignments: readonly Readonly<KeyboardShortcut<AssignedCommand>>[],
 ): () => void {
   const f = onKeyDown.bind(null, commands, keyAssignments);
   document.addEventListener("keydown", f);
@@ -15,8 +15,8 @@ export function startKeyboardShortcuts<
 }
 
 function onKeyDown<Command extends string>(
-  commands: readonly CommandDefinition<Command>[],
-  keyAssignments: readonly KeyboardShortcut<Command>[],
+  commands: readonly Readonly<CommandDefinition<Command>>[],
+  keyAssignments: readonly Readonly<KeyboardShortcut<Command>>[],
   event: KeyboardEvent,
 ) {
   if (event.repeat) {
