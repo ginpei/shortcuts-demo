@@ -6,6 +6,7 @@
   import "./EditorPage.scss";
   import { editorPageCommands } from "./editorPageCommands";
   import { editorPageShortcuts } from "./editorPageShortcuts";
+  import { getEditorPageState } from "./editorPageStateStore";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
 
@@ -14,7 +15,8 @@
   onMount(() => {
     offShortcuts = startKeyboardShortcuts(
       editorPageCommands,
-      editorPageShortcuts
+      editorPageShortcuts,
+      () => getEditorPageState().focus,
     );
   });
 
@@ -34,7 +36,9 @@
   <div class="pane" style="grid-area: list">
     <FileListPane on:app-command={onCommand} />
   </div>
-  <div class="pane" style="grid-area: canvas"><CanvasPane /></div>
+  <div class="pane" style="grid-area: canvas">
+    <CanvasPane on:app-command={onCommand} />
+  </div>
 </div>
 
 <style lang="scss">

@@ -4,10 +4,10 @@ import { editorPageStateStore, getEditorPageState } from "../editorPageStateStor
 export const noteListCommands = toCommandDefinitions([
   {
     action() {
-      const el = document.querySelector("#noteList-list [tabindex]");
-      if (el instanceof HTMLElement) {
-        el.focus();
-      }
+      editorPageStateStore.update((v) => ({
+        ...v,
+        focus: 'noteListPane',
+      }));
     },
     command: "focusFileListPane",
     title: "Focus file list pane",
@@ -54,6 +54,7 @@ export const noteListCommands = toCommandDefinitions([
 
       editorPageStateStore.update((v) => ({
         ...v,
+        focus: 'noteBody',
         selectedNoteId: focusedNoteId,
       }));
     },

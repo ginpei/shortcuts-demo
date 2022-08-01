@@ -4,19 +4,22 @@ import type { KeyboardShortcut } from "./KeyboardShortcut";
 
 export function startKeyboardShortcuts<
   Command extends string,
-  AssignedCommand extends Command
+  AssignedCommand extends Command,
+  FocusType extends string
 >(
   commands: readonly Readonly<CommandDefinition<Command>>[],
   keyAssignments: readonly Readonly<KeyboardShortcut<AssignedCommand>>[],
+  getFocusType: () => FocusType,
 ): () => void {
-  const f = onKeyDown.bind(null, commands, keyAssignments);
+  const f = onKeyDown.bind(null, commands, keyAssignments, getFocusType);
   document.addEventListener("keydown", f);
   return () => document.removeEventListener("keydown", f);
 }
 
-function onKeyDown<Command extends string>(
+function onKeyDown<Command extends string, FocusType extends string>(
   commands: readonly Readonly<CommandDefinition<Command>>[],
   keyAssignments: readonly Readonly<KeyboardShortcut<Command>>[],
+  getFocusType: () => FocusType,
   event: KeyboardEvent,
 ) {
   if (event.repeat) {
@@ -24,14 +27,16 @@ function onKeyDown<Command extends string>(
   }
 
   const keyCombination = toKeyCombination(event);
-  const matchedCommands = findMatchedCommands(keyCombination, commands, keyAssignments)
+  const focusType = getFocusType();
+  const matchedCommands = findMatchedCommands(keyCombination, focusType, commands, keyAssignments)
   for (const command of matchedCommands) {
     command.action();
   }
 }
 
-function findMatchedCommands<Command extends string>(
+function findMatchedCommands<Command extends string, FocusType extends string>(
   keyCombination: string,
+  focusType: FocusType,
   commands: readonly Readonly<CommandDefinition<Command>>[],
   keyAssignments: readonly Readonly<KeyboardShortcut<Command>>[],
 ): CommandDefinition<Command>[] {
@@ -40,6 +45,13 @@ function findMatchedCommands<Command extends string>(
   for (const keyAssignment of keyAssignments) {
     if (!keyAssignment.key.includes(keyCombination)) {
       continue;
+    }
+
+    if (keyAssignment.when.startsWith('focus:')) {
+      const targetFocusType = keyAssignment.when.slice('focus:'.length);
+      if (targetFocusType !== focusType) {
+        continue;
+      }
     }
 
     const commandDef = commands.find((v) => v.command === keyAssignment.command);

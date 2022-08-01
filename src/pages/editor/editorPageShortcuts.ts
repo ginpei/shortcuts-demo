@@ -16,21 +16,20 @@ export const editorPageShortcuts = toShortcutDefinitions([
     key: ["Ctrl+0"],
     when: "",
   },
-  // TODO run only if panel is focused
   {
     command: "moveToPrevNote",
     key: ["ArrowUp"],
-    when: "",
+    when: "focus:noteListPane",
   },
   {
     command: "moveToNextNote",
     key: ["ArrowDown"],
-    when: "",
+    when: "focus:noteListPane",
   },
   {
     command: "openFocusedItemInNoteList",
     key: ["Enter"],
-    when: "",
+    when: "focus:noteListPane",
   },
 ]);
 

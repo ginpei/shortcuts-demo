@@ -1,7 +1,10 @@
 <script lang="ts">
   import type { NiceInputEvent } from "src/domains/events/NiceInputEvent";
   import type { Note } from "src/domains/notes/Note";
+  import { createEventDispatcher } from "svelte";
   import { editorPageStateStore,setNoteState } from "../editorPageStateStore";
+
+  const dispatch = createEventDispatcher();
 
   let note: Note | null = null;
   let title = "";
@@ -19,6 +22,15 @@
     title = newNote.title;
     body = newNote.body;
   });
+
+  // TODO remove focus when blur by keyboard shortcuts
+  function onTitleFocus() {
+    dispatch("app-command", { command: "focusNoteTitle" });
+  }
+
+  function onBodyFocus() {
+    dispatch("app-command", { command: "focusNoteBody" });
+  }
 
   function onInput(event: NiceInputEvent) {
     if (!note) {
@@ -49,6 +61,7 @@
     disabled={!Boolean(note)}
     id="note-title"
     name="title"
+    on:focus={onTitleFocus}
     on:input={onInput}
     type="text"
     value={title}
@@ -58,6 +71,7 @@
     disabled={!Boolean(note)}
     id="note-body"
     name="body"
+    on:focus={onBodyFocus}
     on:input={onInput}
     value={body}
   />

@@ -5,6 +5,11 @@
   import FileListItem from "./NoteListtem.svelte";
 
   const dispatch = createEventDispatcher();
+  let focused = false;
+
+  editorPageStateStore.subscribe((state) => {
+    focused = state.focus === 'noteListPane';
+  });
 
   function onPointerDown() {
     dispatch('app-command', { command: 'focusFileListPane' });
@@ -22,7 +27,7 @@
 </script>
 
 <section class="FileListPane" on:pointerdown={onPointerDown}>
-  <h1 class="heading">File list</h1>
+  <h1 class="heading" class:focused>File list</h1>
   <div class="list" id="noteList-list">
     {#each $editorPageStateStore.notes as note}
       <div class="item">
@@ -48,6 +53,10 @@
     font-size: 1rem;
     margin: 0;
     padding: 8px;
+
+    &.focused {
+      text-decoration: underline;
+    }
   }
 
   .list {
