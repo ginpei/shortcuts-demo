@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher();
 
   function onPointerDown() {
-    dispatch('command', { command: 'focusFileListPane' });
+    dispatch('app-command', { command: 'focusFileListPane' });
   }
 
   function onNoteSelect(note: Note) {

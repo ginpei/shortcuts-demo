@@ -21,7 +21,7 @@
   onDestroy(() => offShortcuts?.());
 
   function onCommand(event: CustomEvent) {
-    if (event.type !== 'command') {
+    if (event.type !== 'app-command') {
       throw new Error(`Expected event type 'command', got ${event.type}`);
     }
 
@@ -32,7 +32,7 @@
 <div class="EditorPage">
   <div class="pane" style="grid-area: toolbar"><ToolbarPane /></div>
   <div class="pane" style="grid-area: list">
-    <FileListPane on:command={onCommand} />
+    <FileListPane on:app-command={onCommand} />
   </div>
   <div class="pane" style="grid-area: canvas"><CanvasPane /></div>
 </div>
