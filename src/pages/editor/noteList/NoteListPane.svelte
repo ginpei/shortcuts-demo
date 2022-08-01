@@ -36,6 +36,7 @@
   .heading {
     font-size: 1rem;
     margin: 0;
+    padding: 8px;
   }
 
   .list {
@@ -45,5 +46,9 @@
 
   .item {
     border-bottom: thin solid lightgray;
+    
+    &:first-child {
+      border-top: thin solid lightgray;
+    }
   }
 </style>
