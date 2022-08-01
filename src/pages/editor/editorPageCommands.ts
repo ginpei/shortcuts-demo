@@ -20,11 +20,6 @@ const editorPageTopCommands = toCommandDefinitions([
   },
   {
     action: () => {
-      const el = document.querySelector("#note-body");
-      if (el instanceof HTMLElement) {
-        el.focus();
-      }
-
       editorPageStateStore.update((v) => ({
         ...v,
         focus: "noteBody",
@@ -35,11 +30,6 @@ const editorPageTopCommands = toCommandDefinitions([
   },
   {
     action: () => {
-      const el = document.querySelector("#note-title");
-      if (el instanceof HTMLElement) {
-        el.focus();
-      }
-
       editorPageStateStore.update((v) => ({
         ...v,
         focus: "noteTitle",
