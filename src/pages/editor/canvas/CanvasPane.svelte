@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { NiceInputEvent } from "src/domains/events/NiceInputEvent";
   import type { Note } from "src/domains/notes/Note";
-  import type { NiceInputEvent } from "src/misc/dom";
   import { editorPageStateStore,setNoteState } from "../editorPageStateStore";
 
   let note: Note | null = null;
