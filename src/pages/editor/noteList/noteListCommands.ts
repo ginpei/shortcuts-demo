@@ -16,10 +16,7 @@ export const noteListCommands = toCommandDefinitions([
     action() {
       const { focusedNoteId, notes } = getEditorPageState();
       const curIndex = notes.findIndex((v) => v.id === focusedNoteId);
-      if (curIndex < 0) {
-        return;
-      }
-      const nextIndex = curIndex - 1;
+      const nextIndex = curIndex >= 0 ? curIndex - 1 : 0;
       const nextNote = notes[nextIndex];
       if (!nextNote) {
         return;
@@ -37,10 +34,7 @@ export const noteListCommands = toCommandDefinitions([
     action() {
       const { focusedNoteId, notes } = getEditorPageState();
       const curIndex = notes.findIndex((v) => v.id === focusedNoteId);
-      if (curIndex < 0) {
-        return;
-      }
-      const nextIndex = curIndex + 1;
+      const nextIndex = curIndex >= 0 ? curIndex + 1 : 0;
       const nextNote = notes[nextIndex];
       if (!nextNote) {
         return;
