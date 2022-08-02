@@ -15,7 +15,7 @@ const focusableSelector = `:where(${focusableTagNames.join(",")},[tabindex]):not
 
 export function startAppFocusHandler<FocusType extends string>(
   map: FocusRecord<FocusType>,
-  store: Writable<FocusState<FocusType>>,
+  store: Writable<FocusState<FocusType | ''>>,
 ): Unsubscriber {
   return store.subscribe(async ({ focus }) => {
     if (!(focus in map)) {
@@ -48,9 +48,13 @@ export function createFocusMap<FocusType extends string>(
 }
 
 function getFocusTarget<FocusType extends string>(
-  focus: FocusType,
+  focus: FocusType | '',
   map: FocusRecord<FocusType>,
 ): HTMLElement | null {
+  if (focus === '') {
+    return null;
+  }
+
   const ref = map[focus];
   if (ref instanceof Element) {
     const elFocusable = findFirstFocusableElement(ref);
