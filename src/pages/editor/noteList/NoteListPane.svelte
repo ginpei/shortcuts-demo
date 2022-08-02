@@ -2,7 +2,7 @@
   import type { Note } from "src/domains/notes/Note";
   import { createEventDispatcher } from "svelte";
   import { editorPageStateStore } from "../editorPageStateStore";
-  import FileListItem from "./NoteListtem.svelte";
+  import FileListItem from "./NoteListItem.svelte";
 
   const dispatch = createEventDispatcher();
   let focused = false;
