@@ -29,6 +29,10 @@ function onKeyDown<Command extends string, FocusType extends string>(
   const keyCombination = toKeyCombination(event);
   const focusType = getFocusType();
   const matchedCommands = findMatchedCommands(keyCombination, focusType, commands, keyAssignments)
+  if (matchedCommands.length > 0) {
+    event.preventDefault();
+  }
+
   for (const command of matchedCommands) {
     command.action();
   }
