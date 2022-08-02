@@ -1,16 +1,10 @@
 <script lang="ts">
-  import { createNote } from "../../../domains/notes/Note";
-  import { addNoteState } from "../editorPageStateStore";
+  import { execEditorPageCommand } from "../commands/editorPageCommands";
 
   export let focused: boolean;
 
   function onAddClick() {
-    const note = createNote({
-      id: Math.random().toFixed(32).slice(2),
-      title: "New note",
-    });
-
-    addNoteState(note);
+    execEditorPageCommand('note:new');
   }
 </script>
 

@@ -9,6 +9,18 @@ export type EditorPageCommandType = typeof editorPageCommands[number]['command']
 const editorPageTopCommands = toCommandDefinitions([
   {
     action: () => {
+      const note = createNote({
+        id: Math.random().toFixed(32).slice(2),
+        title: "New note",
+      });
+  
+      addNoteState(note);
+    },
+    command: "note:new",
+    title: "Create a new note",
+  },
+  {
+    action: () => {
       const el = document.activeElement;
       if (el instanceof HTMLElement) {
         el.blur();
