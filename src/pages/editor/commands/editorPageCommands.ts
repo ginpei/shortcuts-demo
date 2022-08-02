@@ -1,5 +1,7 @@
 import { toCommandDefinitions } from "../../../domains/commands/CommandDefinition";
-import { editorPageStateStore } from "../editorPageStateStore";
+import { execCommand } from "../../../domains/commands/commands";
+import { createNote } from "../../../domains/notes/Note";
+import { addNoteState, editorPageStateStore } from "../editorPageStateStore";
 import { noteListCommands } from "../noteList/noteListCommands";
 
 export type EditorPageCommandType = typeof editorPageCommands[number]['command'];
@@ -46,3 +48,7 @@ export const editorPageCommands = [
   ...editorPageTopCommands,
   ...noteListCommands,
 ];
+
+export function execEditorPageCommand(command: EditorPageCommandType): void {
+  execCommand(editorPageCommands, command);
+}

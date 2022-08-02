@@ -31,23 +31,15 @@
       },
     };
   }
-
-  function onCommand(event: CustomEvent) {
-    if (event.type !== 'app-command') {
-      throw new Error(`Expected event type 'command', got ${event.type}`);
-    }
-
-    execCommand(editorPageCommands, event.detail.command);
-  }
 </script>
 
 <div class="EditorPage" use:onUse>
   <div class="pane" style="grid-area: toolbar"><ToolbarPane /></div>
   <div class="pane" style="grid-area: list">
-    <FileListPane on:app-command={onCommand} />
+    <FileListPane />
   </div>
   <div class="pane" style="grid-area: canvas">
-    <CanvasPane on:app-command={onCommand} />
+    <CanvasPane />
   </div>
 </div>
 

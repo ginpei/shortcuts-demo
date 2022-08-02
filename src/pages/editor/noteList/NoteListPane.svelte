@@ -1,11 +1,10 @@
 <script lang="ts">
   import type { Note } from "src/domains/notes/Note";
-  import { createEditorPageCommandEventDispatcher } from "../commands/editorPageCommandEvents";
+  import { execEditorPageCommand } from "../commands/editorPageCommands";
   import { editorPageStateStore } from "../editorPageStateStore";
   import NoteListHeader from "./NoteListHeader.svelte";
   import FileListItem from "./NoteListItem.svelte";
 
-  const dispatch = createEditorPageCommandEventDispatcher();
   let focused = false;
 
   editorPageStateStore.subscribe((state) => {
@@ -13,7 +12,7 @@
   });
 
   function onPointerDown() {
-    dispatch('focusFileListPane');
+    execEditorPageCommand('focusFileListPane');
   }
 
   function onNoteSelect(note: Note) {
@@ -24,7 +23,7 @@
       };
     });
 
-    dispatch('openFocusedItemInNoteList');
+    execEditorPageCommand('openFocusedItemInNoteList');
   }
 </script>
 
