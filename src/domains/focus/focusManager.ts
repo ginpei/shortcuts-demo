@@ -18,7 +18,7 @@ export function startAppFocusHandler<FocusType extends string>(
   store: Writable<FocusState<FocusType | ''>>,
 ): Unsubscriber {
   return store.subscribe(async ({ focus }) => {
-    if (!(focus in map)) {
+    if (focus !== '' && !(focus in map)) {
       throw new Error(`Unknown focus type: ${focus}`);
     }
 
