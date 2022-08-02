@@ -20,9 +20,10 @@
       return {
         ...values,
         focusedNoteId: note.id,
-        selectedNoteId: note.id,
       };
     });
+
+    dispatch('app-command', { command: 'openFocusedItemInNoteList' });
   }
 </script>
 

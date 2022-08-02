@@ -1,3 +1,4 @@
+import { tick } from "svelte";
 import type { Unsubscriber, Writable } from "svelte/store";
 
 export type FocusRecord<FocusType extends string> = Record<
@@ -16,10 +17,13 @@ export function startAppFocusHandler<FocusType extends string>(
   map: FocusRecord<FocusType>,
   store: Writable<FocusState<FocusType>>,
 ): Unsubscriber {
-  return store.subscribe(({ focus }) => {
+  return store.subscribe(async ({ focus }) => {
     if (!(focus in map)) {
       throw new Error(`Unknown focus type: ${focus}`);
     }
+
+    // let screen get rendered so that input can get disabled off
+    await tick();
 
     const elFocusable = getFocusTarget(focus, map);
     if (elFocusable) {
