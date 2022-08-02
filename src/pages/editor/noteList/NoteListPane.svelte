@@ -2,6 +2,7 @@
   import type { Note } from "src/domains/notes/Note";
   import { createEditorPageCommandEventDispatcher } from "../commands/editorPageCommandEvents";
   import { editorPageStateStore } from "../editorPageStateStore";
+  import NoteListHeader from "./NoteListHeader.svelte";
   import FileListItem from "./NoteListItem.svelte";
 
   const dispatch = createEditorPageCommandEventDispatcher();
@@ -28,7 +29,7 @@
 </script>
 
 <section class="FileListPane" on:pointerdown={onPointerDown}>
-  <h1 class="heading" class:focused>File list</h1>
+  <NoteListHeader {focused} />
   <div class="list" id="noteList-list">
     {#each $editorPageStateStore.notes as note}
       <div class="item">
@@ -46,18 +47,8 @@
 <style lang="scss">
   .FileListPane {
     display: grid;
-    grid-template-rows: 2rem auto;
+    grid-template-rows: calc(32px + 2 * 8px) auto;
     overflow: hidden;
-  }
-
-  .heading {
-    font-size: 1rem;
-    margin: 0;
-    padding: 8px;
-
-    &.focused {
-      text-decoration: underline;
-    }
   }
 
   .list {
