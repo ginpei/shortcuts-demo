@@ -5,11 +5,7 @@
   import NoteListHeader from "./NoteListHeader.svelte";
   import FileListItem from "./NoteListItem.svelte";
 
-  let focused = false;
-
-  editorPageStateStore.subscribe((state) => {
-    focused = state.focus === 'noteListPane';
-  });
+  $: focused = $editorPageStateStore.focus === 'noteListPane';
 
   function onPointerDown() {
     execEditorPageCommand('focusFileListPane');
