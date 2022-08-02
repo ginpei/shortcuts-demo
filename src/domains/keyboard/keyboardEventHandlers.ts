@@ -1,3 +1,7 @@
+const keyRenameMap = {
+  " ": "Space",
+} as const;
+
 export function toKeyCombination(event: KeyboardEvent): string {
   const {
     altKey,
@@ -11,10 +15,14 @@ export function toKeyCombination(event: KeyboardEvent): string {
     ctrlKey || metaKey ? "Ctrl+" : "",
     altKey ? "Alt+" : "",
     shiftKey ? "Shift+" : "",
-    key,
+    renameEventKey(key),
   ]
     .filter((v) => Boolean(v))
     .join("");
 
   return keyCombination;
+}
+
+function renameEventKey(key: string): string {
+  return (keyRenameMap as Record<string, string>)[key] || key;
 }

@@ -31,6 +31,11 @@ export const editorPageShortcuts = toShortcutDefinitions([
     key: ["Enter"],
     when: "focus:noteListPane",
   },
+  {
+    command: "openFocusedItemInNoteList",
+    key: ["Space"],
+    when: "focus:noteListPane",
+  },
 ]);
 
 function toShortcutDefinitions<T extends string>(
