@@ -2,6 +2,8 @@ import { toCommandDefinitions } from "../../../domains/commands/CommandDefinitio
 import { editorPageStateStore } from "../editorPageStateStore";
 import { noteListCommands } from "../noteList/noteListCommands";
 
+export type EditorPageCommandType = typeof editorPageCommands[number]['command'];
+
 const editorPageTopCommands = toCommandDefinitions([
   {
     action: () => {

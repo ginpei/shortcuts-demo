@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { NiceInputEvent } from "src/domains/events/NiceInputEvent";
   import type { Note } from "src/domains/notes/Note";
-  import { createEventDispatcher } from "svelte";
+  import { createEditorPageCommandEventDispatcher } from "../commands/editorPageCommandEvents";
   import { editorPageStateStore,setNoteState } from "../editorPageStateStore";
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEditorPageCommandEventDispatcher();
 
   let note: Note | null = null;
   let title = "";
@@ -25,11 +25,11 @@
 
   // TODO remove focus when blur by keyboard shortcuts
   function onTitleFocus() {
-    dispatch("app-command", { command: "focusNoteTitle" });
+    dispatch('focusNoteTitle');
   }
 
   function onBodyFocus() {
-    dispatch("app-command", { command: "focusNoteBody" });
+    dispatch('focusNoteBody');
   }
 
   function onInput(event: NiceInputEvent) {
