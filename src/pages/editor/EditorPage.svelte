@@ -6,8 +6,8 @@
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import { focusMap } from "./commands/focuses";
   import "./EditorPage.scss";
-  import { editorPageCommands } from "./editorPageCommands";
-  import { editorPageShortcuts } from "./editorPageShortcuts";
+  import { editorPageCommands } from "./commands/editorPageCommands";
+  import { editorPageShortcuts } from "./commands/editorPageShortcuts";
   import { editorPageStateStore,getEditorPageState } from "./editorPageStateStore";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";

@@ -1,6 +1,6 @@
-import { toCommandDefinitions } from "../../domains/commands/CommandDefinition";
-import { editorPageStateStore } from "./editorPageStateStore";
-import { noteListCommands } from "./noteList/noteListCommands";
+import { toCommandDefinitions } from "../../../domains/commands/CommandDefinition";
+import { editorPageStateStore } from "../editorPageStateStore";
+import { noteListCommands } from "../noteList/noteListCommands";
 
 const editorPageTopCommands = toCommandDefinitions([
   {
