@@ -1,11 +1,21 @@
 <script lang="ts">
+  import { scrollIntoView } from "../../../domains/positioning/scrollHandlers";
   import type { Note } from "src/domains/notes/Note";
   import { execEditorPageCommand } from "../commands/editorPageCommands";
   import { editorPageStateStore } from "../editorPageStateStore";
   import NoteListHeader from "./NoteListHeader.svelte";
   import FileListItem from "./NoteListItem.svelte";
 
+  let items: Record<string, HTMLElement> = {};
+
   $: focused = $editorPageStateStore.focus === 'noteListPane';
+
+  $: {
+    const el = items[$editorPageStateStore.focusedNoteId];
+    if (el) {
+      scrollIntoView(el);
+    }
+  }
 
   function onPointerDown() {
     execEditorPageCommand('focusFileListPane');
@@ -27,7 +37,7 @@
   <NoteListHeader {focused} />
   <div class="list" id="noteList-list">
     {#each $editorPageStateStore.notes as note}
-      <div class="item">
+      <div bind:this={items[note.id]} class="item">
         <FileListItem
           focus={note.id === $editorPageStateStore.focusedNoteId}
           note={note}
