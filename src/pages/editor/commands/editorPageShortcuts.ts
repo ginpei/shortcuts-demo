@@ -36,6 +36,16 @@ export const editorPageShortcuts = toShortcutDefinitions([
     key: ["Space"],
     when: "focus:noteListPane",
   },
+  {
+    command: "deleteNoteFocusedInList",
+    key: ["Backspace"],
+    when: "focus:noteListPane",
+  },
+  {
+    command: "deleteNoteFocusedInList",
+    key: ["Delete"],
+    when: "focus:noteListPane",
+  },
 ]);
 
 function toShortcutDefinitions<T extends string>(

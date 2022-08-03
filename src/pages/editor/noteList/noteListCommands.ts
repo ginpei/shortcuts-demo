@@ -55,7 +55,34 @@ export const noteListCommands = toCommandDefinitions([
         selectedNoteId: focusedNoteId,
       }));
     },
-    command: "openFocusedItemInNoteList",
+    command: "openFocusedItemInNoteList", // TODO rename
     title: "Open focused item",
+  },
+  {
+    action() {
+      editorPageStateStore.update((state) => {
+        const { focusedNoteId, notes, selectedNoteId } = state;
+
+        const nextNote =
+          findNextNote(notes, focusedNoteId) ??
+          findPrevNote(notes, focusedNoteId);
+        const newFocusedNoteId = nextNote?.id ?? "";
+
+        const newNotes = state.notes.filter((v) => v.id !== focusedNoteId);
+
+        const newSelectedNoteId = selectedNoteId === focusedNoteId
+          ? "" :
+          selectedNoteId;
+
+        return {
+          ...state,
+          focusedNoteId: newFocusedNoteId,
+          notes: newNotes,
+          selectedNoteId: newSelectedNoteId,
+        };
+      });
+    },
+    command: "deleteNoteFocusedInList",
+    title: "Delete focused item",
   },
 ]);

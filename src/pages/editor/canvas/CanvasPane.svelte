@@ -12,6 +12,7 @@
     const newNote = notes.find((v) => v.id === selectedNoteId);
     if (!newNote) {
       note = null;
+      title = "";
       body = "";
       return;
     }
