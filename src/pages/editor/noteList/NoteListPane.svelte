@@ -29,7 +29,7 @@
       };
     });
 
-    execEditorPageCommand('openFocusedItemInNoteList');
+    execEditorPageCommand('openItemInFocusedNoteList');
   }
 </script>
 

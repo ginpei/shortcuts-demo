@@ -55,7 +55,7 @@ export const noteListCommands = toCommandDefinitions([
         selectedNoteId: focusedNoteId,
       }));
     },
-    command: "openFocusedItemInNoteList", // TODO rename
+    command: "openItemInFocusedNoteList",
     title: "Open focused item",
   },
   {
