@@ -1,4 +1,5 @@
 import { toCommandDefinitions } from "../../../domains/commands/CommandDefinition";
+import { findNextNote, findPrevNote } from "../EditorPageState";
 import { editorPageStateStore, getEditorPageState } from "../editorPageStateStore";
 
 export const noteListCommands = toCommandDefinitions([
@@ -15,16 +16,14 @@ export const noteListCommands = toCommandDefinitions([
   {
     action() {
       const { focusedNoteId, notes } = getEditorPageState();
-      const curIndex = notes.findIndex((v) => v.id === focusedNoteId);
-      const nextIndex = curIndex >= 0 ? curIndex - 1 : 0;
-      const nextNote = notes[nextIndex];
-      if (!nextNote) {
+      const prevNote = findPrevNote(notes, focusedNoteId);
+      if (!prevNote) {
         return;
       }
 
       editorPageStateStore.update((v) => ({
         ...v,
-        focusedNoteId: nextNote.id,
+        focusedNoteId: prevNote.id,
       }));
     },
     command: "moveToPrevNote",
@@ -33,9 +32,7 @@ export const noteListCommands = toCommandDefinitions([
   {
     action() {
       const { focusedNoteId, notes } = getEditorPageState();
-      const curIndex = notes.findIndex((v) => v.id === focusedNoteId);
-      const nextIndex = curIndex >= 0 ? curIndex + 1 : 0;
-      const nextNote = notes[nextIndex];
+      const nextNote = findNextNote(notes, focusedNoteId);
       if (!nextNote) {
         return;
       }

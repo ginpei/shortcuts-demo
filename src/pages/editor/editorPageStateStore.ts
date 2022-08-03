@@ -1,33 +1,12 @@
 import type { Note } from "src/domains/notes/Note";
-import { getUserNotes } from "../../domains/notes/noteDb";
 import { get, writable } from "svelte/store";
-
-export interface EditorPageState {
-  focus: FocusType;
-  focusedNoteId: string;
-  notes: Note[];
-  selectedNoteId: string;
-}
-
-export type FocusType =
-  | ""
-  | "noteListPane"
-  | "noteTitle"
-  | "noteBody"
+import { getUserNotes } from "../../domains/notes/noteDb";
+import { createEditorPageState, type EditorPageState } from "./EditorPageState";
 
 export const editorPageStateStore = writable<EditorPageState>(createEditorPageState());
 
 export function getEditorPageState(): Readonly<EditorPageState> {
   return get(editorPageStateStore);
-}
-
-export function createEditorPageState(): EditorPageState {
-  return {
-    focus: "",
-    focusedNoteId: "",
-    notes: [],
-    selectedNoteId: "",
-  };
 }
 
 export async function initEditorPageStateStore() {
