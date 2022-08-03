@@ -23,6 +23,10 @@ export function createEditorPageState(): EditorPageState {
 }
 
 export function findNextNote(notes: Note[], noteId: string): Note | null {
+  if (!noteId) {
+    return notes[0] ?? null;
+  }
+
   const curIndex = notes.findIndex((v) => v.id === noteId);
   if (curIndex < 0) {
     throw new Error(`Note ${noteId} not found`);
@@ -33,6 +37,10 @@ export function findNextNote(notes: Note[], noteId: string): Note | null {
 }
 
 export function findPrevNote(notes: Note[], noteId: string): Note | null {
+  if (!noteId) {
+    return notes[0] ?? null;
+  }
+
   const curIndex = notes.findIndex((v) => v.id === noteId);
   if (curIndex < 0) {
     throw new Error(`Note ${noteId} not found`);
