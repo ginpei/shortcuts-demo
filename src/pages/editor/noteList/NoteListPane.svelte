@@ -35,7 +35,7 @@
 
 <section class="FileListPane" on:pointerdown={onPointerDown}>
   <NoteListHeader {focused} />
-  <div class="list" id="noteList-list">
+  <div class="list" class:focus={focused} id="noteList-list">
     {#each $editorPageStateStore.notes as note}
       <div bind:this={items[note.id]} class="item">
         <FileListItem
@@ -57,8 +57,15 @@
   }
 
   .list {
+    --note-list-pane--list-item--background-color--focus: #999;
+    --note-list-pane--list-item--color--focus: #fff;
     overflow: auto;
     padding-bottom: calc(8px * 10);
+
+    &.focus {
+      --note-list-pane--list-item--background-color--focus: #036;
+      outline: thin solid blue;
+    }
   }
 
   .item {

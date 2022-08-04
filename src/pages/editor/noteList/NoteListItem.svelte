@@ -36,8 +36,8 @@
     }
 
     &.selected {
-      background-color: #036;
-      color: white;
+      background-color: var(--note-list-pane--list-item--background-color--focus);
+      color: var(--note-list-pane--list-item--color--focus);
     }
   }
 </style>
