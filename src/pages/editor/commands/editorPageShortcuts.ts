@@ -46,6 +46,11 @@ export const editorPageShortcuts = toShortcutDefinitions([
     key: ["Delete"],
     when: "focus:noteListPane",
   },
+  {
+    command: "note:new",
+    key: ["Alt+N"],
+    when: "",
+  },
 ]);
 
 function toShortcutDefinitions<T extends string>(

@@ -24,5 +24,15 @@ export function toKeyCombination(event: KeyboardEvent): string {
 }
 
 function renameEventKey(key: string): string {
-  return (keyRenameMap as Record<string, string>)[key] || key;
+  // e.g. " " -> "Space"
+  const mapped = (keyRenameMap as Record<string, string>)[key];
+  if (mapped) {
+    return mapped;
+  }
+
+  if (key.length === 1) {
+    return key.toUpperCase();
+  }
+
+  return key;
 }
