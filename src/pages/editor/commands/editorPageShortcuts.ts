@@ -2,7 +2,7 @@ import type { KeyboardShortcut } from "src/domains/keyboard/KeyboardShortcut";
 
 export const editorPageShortcuts = toShortcutDefinitions([
   {
-    command: "focusFileListPane",
+    command: "focusFileList",
     key: ["Ctrl+Shift+E"],
     when: "",
   },
@@ -19,32 +19,32 @@ export const editorPageShortcuts = toShortcutDefinitions([
   {
     command: "moveToPrevNote",
     key: ["ArrowUp"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "moveToNextNote",
     key: ["ArrowDown"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "openItemInFocusedNoteList",
     key: ["Enter"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "openItemInFocusedNoteList",
     key: ["Space"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "deleteNoteFocusedInList",
     key: ["Backspace"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "deleteNoteFocusedInList",
     key: ["Delete"],
-    when: "focus:noteListPane",
+    when: "focus:noteList",
   },
   {
     command: "note:new",

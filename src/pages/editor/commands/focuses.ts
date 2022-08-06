@@ -1,7 +1,7 @@
 import { createFocusMap } from "../../../domains/focus/focusManager";
 
 export const focusMap = createFocusMap({
-  'noteListPane': null,
+  'noteList': '#noteList-list',
   'noteTitle': '#note-title',
   'noteBody': '#note-body',
 });

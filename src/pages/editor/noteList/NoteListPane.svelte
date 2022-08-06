@@ -8,8 +8,6 @@
 
   let items: Record<string, HTMLElement> = {};
 
-  $: focused = $editorPageStateStore.focus === 'noteListPane';
-
   $: {
     const el = items[$editorPageStateStore.focusedNoteId];
     if (el) {
@@ -18,11 +16,25 @@
   }
 
   function onPointerDown() {
-    execEditorPageCommand('focusFileListPane');
+    execEditorPageCommand('focusFileList');
+  }
+
+  function onListFocus() {
+    editorPageStateStore.update((values) => ({
+      ...values,
+      focus: 'noteList',
+    }));
   }
 
   function onNoteSelect(note: Note) {
     editorPageStateStore.update((values) => {
+      if (values.selectedNoteId === note.id) {
+        return {
+          ...values,
+          focus: 'noteList',
+        };
+      }
+
       return {
         ...values,
         focusedNoteId: note.id,
@@ -34,8 +46,8 @@
 </script>
 
 <section class="FileListPane" on:pointerdown={onPointerDown}>
-  <NoteListHeader {focused} />
-  <div class="list" class:focus={focused} id="noteList-list">
+  <NoteListHeader />
+  <div class="list" id="noteList-list" on:focus={onListFocus} tabindex="0">
     {#each $editorPageStateStore.notes as note}
       <div bind:this={items[note.id]} class="item">
         <FileListItem
@@ -59,12 +71,13 @@
   .list {
     --note-list-pane--list-item--background-color--focus: #999;
     --note-list-pane--list-item--color--focus: #fff;
+    border-radius: 4px;
     overflow: auto;
     padding-bottom: calc(8px * 10);
+    outline-offset: -2px;
 
-    &.focus {
+    &:focus-visible {
       --note-list-pane--list-item--background-color--focus: #036;
-      outline: thin solid blue;
     }
   }
 

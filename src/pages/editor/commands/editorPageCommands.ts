@@ -58,11 +58,11 @@ export const editorPageCommands = toCommandDefinitions([
     action() {
       editorPageStateStore.update((v) => ({
         ...v,
-        focus: 'noteListPane',
+        focus: 'noteList',
       }));
     },
-    command: "focusFileListPane",
-    title: "Focus file list pane",
+    command: "focusFileList",
+    title: "Focus file list", // TODO s/file/note/
   },
   {
     action() {

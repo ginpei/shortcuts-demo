@@ -9,7 +9,7 @@ export interface EditorPageState {
 
 export type FocusType =
   | ""
-  | "noteListPane"
+  | "noteList"
   | "noteTitle"
   | "noteBody"
 
