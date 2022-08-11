@@ -19,32 +19,32 @@ export const editorPageShortcuts = toShortcutDefinitions([
   {
     command: "moveToPrevNote",
     key: ["ArrowUp"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "moveToNextNote",
     key: ["ArrowDown"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "openItemInFocusedNoteList",
     key: ["Enter"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "openItemInFocusedNoteList",
     key: ["Space"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "deleteNoteFocusedInList",
     key: ["Backspace"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "deleteNoteFocusedInList",
     key: ["Delete"],
-    when: "focus:noteList",
+    when: "focus:noteList-list",
   },
   {
     command: "note:new",

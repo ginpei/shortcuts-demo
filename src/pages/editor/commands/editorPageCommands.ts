@@ -1,5 +1,7 @@
+import { tick } from "svelte";
 import { toCommandDefinitions } from "../../../domains/commands/CommandDefinition";
 import { execCommand } from "../../../domains/commands/commands";
+import { setFocus } from "../../../domains/focus/focusManager";
 import { createNote } from "../../../domains/notes/Note";
 import { findNextNote, findPrevNote } from "../EditorPageState";
 import { addNoteState, editorPageStateStore, getEditorPageState } from "../editorPageStateStore";
@@ -26,40 +28,28 @@ export const editorPageCommands = toCommandDefinitions([
         el.blur();
       }
 
-      editorPageStateStore.update((v) => ({
-        ...v,
-        focus: "",
-      }));
+      setFocus("");
     },
     command: "focusNone",
     title: "Remove focus",
   },
   {
     action: () => {
-      editorPageStateStore.update((v) => ({
-        ...v,
-        focus: "noteBody",
-      }));
+      setFocus("note-body");
     },
     command: "focusNoteBody",
     title: "Focus note body",
   },
   {
     action: () => {
-      editorPageStateStore.update((v) => ({
-        ...v,
-        focus: "noteTitle",
-      }));
+      setFocus("note-title");
     },
     command: "focusNoteTitle",
     title: "Focus note title",
   },
   {
     action() {
-      editorPageStateStore.update((v) => ({
-        ...v,
-        focus: 'noteList',
-      }));
+      setFocus("noteList-list");
     },
     command: "focusFileList",
     title: "Focus file list", // TODO s/file/note/
@@ -97,14 +87,15 @@ export const editorPageCommands = toCommandDefinitions([
     title: "Move to next note",
   },
   {
-    action() {
+    async action() {
       const { focusedNoteId } = getEditorPageState();
 
       editorPageStateStore.update((v) => ({
         ...v,
-        focus: 'noteBody',
         selectedNoteId: focusedNoteId,
       }));
+      await tick();
+      setFocus("note-body");
     },
     command: "openItemInFocusedNoteList",
     title: "Open focused item",

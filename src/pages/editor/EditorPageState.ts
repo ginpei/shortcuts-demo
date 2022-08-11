@@ -1,17 +1,11 @@
 import type { Note } from "src/domains/notes/Note";
 
 export interface EditorPageState {
-  focus: FocusType;
+  focus: string;
   focusedNoteId: string;
   notes: Note[];
   selectedNoteId: string;
 }
-
-export type FocusType =
-  | ""
-  | "noteList"
-  | "noteTitle"
-  | "noteBody"
 
 export function createEditorPageState(): EditorPageState {
   return {

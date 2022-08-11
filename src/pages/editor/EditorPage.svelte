@@ -1,11 +1,10 @@
 <script lang="ts">
   import type { Action } from "svelte/types/runtime/action";
-  import { startAppFocusHandler } from "../../domains/focus/focusManager";
+  import { bindFocusToStore } from "../../domains/focus/focusManager";
   import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcutHandlers";
   import CanvasPane from "./canvas/CanvasPane.svelte";
   import { editorPageCommands } from "./commands/editorPageCommands";
   import { editorPageShortcuts } from "./commands/editorPageShortcuts";
-  import { focusMap } from "./commands/focuses";
   import "./EditorPage.scss";
   import { editorPageStateStore,getEditorPageState } from "./editorPageStateStore";
   import FileListPane from "./noteList/NoteListPane.svelte";
@@ -18,10 +17,7 @@
       () => getEditorPageState().focus,
     );
 
-    const offFocusManager = startAppFocusHandler(
-      focusMap,
-      editorPageStateStore,
-    );
+    const offFocusManager = bindFocusToStore(editorPageStateStore);
 
     return {
       destroy() {

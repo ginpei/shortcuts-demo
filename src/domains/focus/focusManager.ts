@@ -1,76 +1,60 @@
-import { tick } from "svelte";
 import type { Unsubscriber, Writable } from "svelte/store";
+import { runEachAnimationFrame } from "../timer/animationFrameHandlers";
 
-export type FocusRecord<FocusType extends string> = Record<
-  FocusType,
-  string | ((elRoot: HTMLElement) => string) | null
->;
-
-export interface FocusState<FocusType extends string> {
-  focus: FocusType;
+export interface FocusState {
+  focus: string;
 }
 
 const focusableTagNames = ["A", "BUTTON", "INPUT", "SELECT", "TEXTAREA"] as const;
 const focusableSelector = `:where(${focusableTagNames.join(",")},[tabindex]):not(:disabled,.disabled,[tabindex="-1"])`;
 
-export function startAppFocusHandler<FocusType extends string>(
-  map: FocusRecord<FocusType>,
-  store: Writable<FocusState<FocusType | ''>>,
-): Unsubscriber {
-  return store.subscribe(async ({ focus }) => {
-    if (focus !== '' && !(focus in map)) {
-      throw new Error(`Unknown focus type: ${focus}`);
+// TODO extract
+export function bindFocusToStore(store: Writable<FocusState>): Unsubscriber {
+  return onFocusChange((elFocus) => {
+    const focus = elFocus ? elFocus.id : '';
+    store.update((state) => ({ ...state, focus }));
+  });
+}
+
+export function setFocus(id: string, d: Document | Element = document): boolean {
+  const el = id === "" ? null : d.querySelector(`#${id}`);
+  if (!(el instanceof HTMLElement)) {
+    if (id !== "") {
+      console.warn(`Focus target not found: ${id}`);
     }
 
-    // let screen get rendered so that input can get disabled off
-    await tick();
+    const activeElement = d.ownerDocument?.activeElement;
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
 
-    const elFocusable = getFocusTarget(focus, map);
-    if (elFocusable) {
-      elFocusable.focus();
+    return false;
+  }
 
-      if (elFocusable instanceof HTMLInputElement) {
-        elFocusable.select();
-      }
-    } else {
-      const elCur = document.activeElement;
-      if (elCur instanceof HTMLElement) {
-        elCur.blur();
-      }
+  el.focus();
+  return true;
+}
+
+export function onFocusChange(
+  listener: (el: Element | null) => void,
+  root: Document | Element = document,
+): Unsubscriber {
+  const d = root instanceof Document ? root : root.ownerDocument;
+  if (!d) {
+    return () => undefined;
+  }
+
+  let elFocus = d.activeElement;
+  return runEachAnimationFrame(() => {
+    const elNewFocus = d.activeElement;
+    if (elNewFocus !== elFocus) {
+      listener(elNewFocus);
+      elFocus = elNewFocus;
     }
   });
 }
 
-export function createFocusMap<FocusType extends string>(
-  map: FocusRecord<FocusType>,
-): FocusRecord<FocusType> {
-  return map;
-}
-
-function getFocusTarget<FocusType extends string>(
-  focus: FocusType | '',
-  map: FocusRecord<FocusType>,
-): HTMLElement | null {
-  if (focus === '') {
-    return null;
-  }
-
-  const ref = map[focus];
-  if (ref instanceof Element) {
-    const elFocusable = findFirstFocusableElement(ref);
-    if (elFocusable) {
-      return elFocusable;
-    }
-  } else if (typeof ref === 'string') {
-    const elTarget = document.querySelector(ref);
-    if (elTarget instanceof HTMLElement) {
-      return elTarget
-    }
-  }
-
-  return null;
-}
-
+// TODO remove later or use
 function findFirstFocusableElement(elRoot: Element): HTMLElement | null {
   if (elRoot instanceof HTMLElement && elRoot.matches(focusableSelector)) {
     return elRoot;
