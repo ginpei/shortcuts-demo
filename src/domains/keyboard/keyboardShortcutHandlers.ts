@@ -21,15 +21,11 @@ function onKeyDown<Command extends string>(
   getFocusId: () => string,
   event: KeyboardEvent,
 ) {
-  if (event.repeat) {
-    return;
-  }
-
   const keyCombination = toKeyCombination(event);
   // console.log("keyCombination", keyCombination);
 
   const focusId = getFocusId();
-  const matchedCommands = findMatchedCommands(keyCombination, focusId, commands, keyAssignments)
+  const matchedCommands = findMatchedCommands(keyCombination, event.repeat, focusId, commands, keyAssignments)
   if (matchedCommands.length > 0) {
     event.preventDefault();
   }
@@ -41,6 +37,7 @@ function onKeyDown<Command extends string>(
 
 function findMatchedCommands<Command extends string>(
   keyCombination: string,
+  repeat: boolean,
   focusId: string,
   commands: readonly Readonly<CommandDefinition<Command>>[],
   keyAssignments: readonly Readonly<KeyboardShortcut<Command>>[],
@@ -48,6 +45,10 @@ function findMatchedCommands<Command extends string>(
   const matchedCommands: CommandDefinition<Command>[] = [];
 
   for (const keyAssignment of keyAssignments) {
+    if (repeat === true && keyAssignment.repeat !== true) {
+      continue;
+    }
+
     if (!keyAssignment.key.includes(keyCombination)) {
       continue;
     }

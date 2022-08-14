@@ -16,11 +16,13 @@ export const editorPageShortcuts = toShortcutDefinitions([
   {
     command: "moveToPrevNote",
     key: "ArrowUp",
+    repeat: true,
     when: "focus:noteList-list",
   },
   {
     command: "moveToNextNote",
     key: "ArrowDown",
+    repeat: true,
     when: "focus:noteList-list",
   },
   {
