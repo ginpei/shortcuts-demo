@@ -52,7 +52,7 @@ function findMatchedCommands<Command extends string>(
       continue;
     }
 
-    if (keyAssignment.when.startsWith('focus:')) {
+    if (keyAssignment.when?.startsWith('focus:')) {
       const targetFocus = keyAssignment.when.slice('focus:'.length);
       if (targetFocus !== focusId) {
         continue;

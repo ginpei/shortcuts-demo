@@ -3,53 +3,49 @@ import type { KeyboardShortcut } from "src/domains/keyboard/KeyboardShortcut";
 export const editorPageShortcuts = toShortcutDefinitions([
   {
     command: "focusFileList",
-    key: ["Ctrl+Shift+E"],
-    when: "",
+    key: "Ctrl+Shift+E",
   },
   {
     command: "focusNoteBody",
-    key: ["Ctrl+1"],
-    when: "",
+    key: "Ctrl+1",
   },
   {
     command: "focusNoteTitle",
-    key: ["Ctrl+0"],
-    when: "",
+    key: "Ctrl+0",
   },
   {
     command: "moveToPrevNote",
-    key: ["ArrowUp"],
+    key: "ArrowUp",
     when: "focus:noteList-list",
   },
   {
     command: "moveToNextNote",
-    key: ["ArrowDown"],
+    key: "ArrowDown",
     when: "focus:noteList-list",
   },
   {
     command: "openItemInFocusedNoteList",
-    key: ["Enter"],
+    key: "Enter",
     when: "focus:noteList-list",
   },
   {
     command: "openItemInFocusedNoteList",
-    key: ["Space"],
+    key: "Space",
     when: "focus:noteList-list",
   },
   {
     command: "deleteNoteFocusedInList",
-    key: ["Backspace"],
+    key: "Backspace",
     when: "focus:noteList-list",
   },
   {
     command: "deleteNoteFocusedInList",
-    key: ["Delete"],
+    key: "Delete",
     when: "focus:noteList-list",
   },
   {
     command: "note:new",
-    key: ["Alt+N"],
-    when: "",
+    key: "Alt+N",
   },
 ]);
 
