@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { Note } from "src/domains/notes/Note";
+  import { setFocus } from "../../../../src/domains/focus/focusManager";
+  import type { Note } from "../../../../src/domains/notes/Note";
   import { scrollIntoView } from "../../../domains/positioning/scrollHandlers";
   import { execEditorPageCommand } from "../commands/editorPageCommands";
   import { editorPageStateStore } from "../editorPageStateStore";
@@ -14,33 +15,22 @@
     }
   }
 
-  function onListFocus() {
+  function onNoteSelect(note: Note) {
+    if ($editorPageStateStore.selectedNoteId === note.id) {
+      setFocus('noteList-list');
+      return;
+    }
+
     editorPageStateStore.update((values) => ({
       ...values,
-      focus: 'noteList',
+      focusedNoteId: note.id,
     }));
-  }
-
-  function onNoteSelect(note: Note) {
-    editorPageStateStore.update((values) => {
-      if (values.selectedNoteId === note.id) {
-        return {
-          ...values,
-          focus: 'noteList',
-        };
-      }
-
-      return {
-        ...values,
-        focusedNoteId: note.id,
-      };
-    });
 
     execEditorPageCommand('openItemInFocusedNoteList');
   }
 </script>
 
-<div class="NoteList" id="noteList-list" on:focus={onListFocus} tabindex="0">
+<div class="NoteList" id="noteList-list" tabindex="0">
   {#each $editorPageStateStore.notes as note}
     <div bind:this={items[note.id]} class="item">
       <FileListItem
