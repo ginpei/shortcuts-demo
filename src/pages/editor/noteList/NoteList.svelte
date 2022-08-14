@@ -62,7 +62,7 @@
     padding-bottom: calc(8px * 10);
     outline-offset: -2px;
 
-    &:focus-visible {
+    &:focus {
       --note-list-pane--list-item--background-color--focus: #036;
     }
   }
