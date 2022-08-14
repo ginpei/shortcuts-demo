@@ -7,11 +7,16 @@
   import FileListItem from "./NoteListItem.svelte";
 
   let items: Record<string, HTMLElement> = {};
+  let lastFocusedNoteId = $editorPageStateStore.focusedNoteId;
 
   $: {
-    const el = items[$editorPageStateStore.focusedNoteId];
-    if (el) {
-      scrollIntoView(el);
+    const { focusedNoteId } = $editorPageStateStore;
+    if (focusedNoteId !== lastFocusedNoteId) {
+      lastFocusedNoteId = focusedNoteId;
+      const el = items[focusedNoteId];
+      if (el) {
+        scrollIntoView(el);
+      }
     }
   }
 
