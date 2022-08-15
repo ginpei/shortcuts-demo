@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Icon from "../../../domains/icons/Icon.svelte";
   import { execEditorPageCommand } from "../commands/editorPageCommands";
 
   function onAddClick() {
@@ -10,10 +11,10 @@
   <h1 class="heading">File list</h1>
   <div class="controls">
     <button class="button" on:click={onAddClick}>
-      +
+      <Icon name="plus" />
     </button>
     <button class="button">
-      🔍
+      <Icon name="magnifying-glass" />
     </button>
   </div>
 </header>
