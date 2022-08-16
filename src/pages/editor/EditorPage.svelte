@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Action } from "svelte/types/runtime/action";
+  import { showError } from "../../domains/errors/errorUiHandlers";
   import { bindFocusToStore } from "../../domains/focus/focusManager";
   import { startKeyboardShortcuts } from "../../domains/keyboard/keyboardShortcutHandlers";
   import CanvasPane from "./canvas/CanvasPane.svelte";
@@ -15,6 +16,7 @@
       editorPageCommands,
       editorPageShortcuts,
       () => getEditorPageState().focus,
+      (error) => showError(error),
     );
 
     const offFocusManager = bindFocusToStore(editorPageStateStore);

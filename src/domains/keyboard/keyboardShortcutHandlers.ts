@@ -1,4 +1,5 @@
 import type { CommandDefinition } from "../commands/CommandDefinition";
+import { toError } from "../errors/errorHandlers";
 import { toKeyCombination } from "./keyboardEventHandlers";
 import type { KeyboardShortcut } from "./KeyboardShortcut";
 
@@ -9,8 +10,19 @@ export function startKeyboardShortcuts<
   commands: readonly Readonly<CommandDefinition<Command>>[],
   keyAssignments: readonly Readonly<KeyboardShortcut<AssignedCommand>>[],
   getFocusId: () => string,
+  onError?: (error: Error) => void,
 ): () => void {
-  const f = onKeyDown.bind(null, commands, keyAssignments, getFocusId);
+  const f = (event: KeyboardEvent) => {
+    try {
+      onKeyDown(commands, keyAssignments, getFocusId, event);
+    } catch (error) {
+      if (onError) {
+        onError(toError(error));
+      } else {
+        throw error;
+      }
+    }
+  };
   document.addEventListener("keydown", f);
   return () => document.removeEventListener("keydown", f);
 }
