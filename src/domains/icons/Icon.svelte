@@ -7,6 +7,9 @@
 
   export let name: IconName;
   export let type: IconType = "solid";
+  export let size: string | undefined = undefined;
+
+  $: style = size ? `--icon--size: ${size};` : "";
 
   const pSvgFile = import(`./svg/${name}-${type}.svg?raw`);
   pSvgFile.catch((error) => {
@@ -14,7 +17,7 @@
   });
 </script>
 
-<i class="Icon">
+<i class="Icon" {style}>
   {#await pSvgFile then { default: svgCode }}
     {@html svgCode}
   {:catch}
@@ -25,15 +28,15 @@
 
 <style lang="scss">
   .Icon {
+    --icon--size: 1.5ex;
     display: inline-block;
-    height: 1.5ex;
-    /* vertical-align: middle; */
-    width: 1.5ex;
+    height: var(--icon--size);
+    width: var(--icon--size);
 
     & > :global(svg) {
       fill: currentColor;
-      height: 1.5ex;
-      width: 1.5ex;
+      height: 100%;
+      width: 100%;
     }
   }
 </style>
