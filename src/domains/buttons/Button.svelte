@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<button class="Button">
+<button class="Button" on:click>
   <slot />
 </button>
 
