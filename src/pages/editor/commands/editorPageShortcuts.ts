@@ -26,7 +26,7 @@ export const editorPageShortcuts = toShortcutDefinitions([
     when: "focus:noteList-list",
   },
   {
-    command: "openItemInFocusedNoteList",
+    command: "openItemInFocusedNoteListAndFocusNoteBody",
     key: "Enter",
     when: "focus:noteList-list",
   },

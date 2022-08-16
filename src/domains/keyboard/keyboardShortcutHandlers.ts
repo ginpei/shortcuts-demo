@@ -73,9 +73,11 @@ function findMatchedCommands<Command extends string>(
     }
 
     const commandDef = commands.find((v) => v.command === keyAssignment.command);
-    if (commandDef) {
-      matchedCommands.push(commandDef);
+    if (!commandDef) {
+      throw new Error(`Command not found: ${keyAssignment.command}`);
     }
+
+    matchedCommands.push(commandDef);
   }
 
   return matchedCommands;

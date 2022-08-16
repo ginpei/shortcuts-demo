@@ -94,10 +94,22 @@ export const editorPageCommands = toCommandDefinitions([
         ...v,
         selectedNoteId: focusedNoteId,
       }));
+    },
+    command: "openItemInFocusedNoteList",
+    title: "Open focused item",
+  },
+  {
+    async action() {
+      const { focusedNoteId } = getEditorPageState();
+
+      editorPageStateStore.update((v) => ({
+        ...v,
+        selectedNoteId: focusedNoteId,
+      }));
       await tick();
       setFocus("note-body");
     },
-    command: "openItemInFocusedNoteList",
+    command: "openItemInFocusedNoteListAndFocusNoteBody",
     title: "Open focused item",
   },
   {
