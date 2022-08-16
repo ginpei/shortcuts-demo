@@ -61,7 +61,7 @@ function findMatchedCommands<Command extends string>(
       continue;
     }
 
-    if (!keyAssignment.key.includes(keyCombination)) {
+    if (keyAssignment.key !== keyCombination) {
       continue;
     }
 
