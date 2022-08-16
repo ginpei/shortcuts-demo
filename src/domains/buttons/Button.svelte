@@ -11,8 +11,13 @@
     border-radius: 2px;
     border: thin solid currentColor;
     color: #036;
+    cursor: pointer;
     min-height: 32px;
     min-width: 32px;
+
+    &:hover {
+      box-shadow: 0 0 0.1em currentColor inset;
+    }
 
     &:active {
       box-shadow: 0 0 0.2em currentColor inset;
