@@ -13,13 +13,9 @@
       scrollIntoView(el);
     }
   }
-
-  function onPointerDown() {
-    execEditorPageCommand('focusFileList');
-  }
 </script>
 
-<section class="FileListPane" on:pointerdown={onPointerDown}>
+<section class="FileListPane">
   <NoteListHeader />
   <NoteList />
 </section>
