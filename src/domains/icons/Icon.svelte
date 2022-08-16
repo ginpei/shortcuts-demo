@@ -1,12 +1,13 @@
 <script context="module" lang="ts">
   export type IconType = "solid";
+  export const defaultIconType: IconType = "solid";
 </script>
 
 <script lang="ts">
   import type { IconName } from "./IconName";
 
   export let name: IconName;
-  export let type: IconType = "solid";
+  export let type: IconType = defaultIconType;
   export let size: string | undefined = undefined;
 
   $: style = size ? `--icon--size: ${size};` : "";
