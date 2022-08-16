@@ -26,13 +26,14 @@
 <style lang="scss">
   .Icon {
     display: inline-block;
-    height: 1em;
-    width: 1em;
+    height: 1.5ex;
+    /* vertical-align: middle; */
+    width: 1.5ex;
 
     & > :global(svg) {
       fill: currentColor;
-      height: 1em;
-      width: 1em;
+      height: 1.5ex;
+      width: 1.5ex;
     }
   }
 </style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Button from "../../../domains/buttons/Button.svelte";
   import Icon from "../../../domains/icons/Icon.svelte";
   import { execEditorPageCommand } from "../commands/editorPageCommands";
 
@@ -10,12 +11,14 @@
 <header class="NoteListHeader">
   <h1 class="heading">File list</h1>
   <div class="controls">
-    <button class="button" on:click={onAddClick}>
+    <Button on:click={onAddClick}>
       <Icon name="plus" />
-    </button>
-    <button class="button">
+      Add
+    </Button>
+    <Button>
       <Icon name="magnifying-glass" />
-    </button>
+      Search
+    </Button>
   </div>
 </header>
 
@@ -35,11 +38,5 @@
   .controls {
     display: flex;
     gap: 2px;
-  }
-
-  .button {
-    padding: 0;
-    height: 32px;
-    width: 32px;
   }
 </style>
