@@ -13,5 +13,9 @@
     color: #036;
     min-height: 32px;
     min-width: 32px;
+
+    &:active {
+      box-shadow: 0 0 0.2em currentColor inset;
+    }
   }
 </style>
