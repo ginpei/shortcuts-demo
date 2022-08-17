@@ -25,7 +25,7 @@
 <div
   class:focus={focus}
   class:selected={selected}
-  class="FileItem"
+  class="NoteListItem"
   on:click={onClick}
 >
   <div class="title" title={note.title}>{note.title}</div>
@@ -37,7 +37,7 @@
 </div>
 
 <style lang="scss">
-  .FileItem {
+  .NoteListItem {
     align-items: center;
     border: 2px solid white;
     box-sizing: border-box;
@@ -67,9 +67,9 @@
   .controls {
     visibility: hidden;
 
-    .FileItem:hover &,
-    .FileItem.focus &,
-    .FileItem:focus & {
+    .NoteListItem:hover &,
+    .NoteListItem.focus &,
+    .NoteListItem:focus & {
       visibility: visible;
     }
   }
