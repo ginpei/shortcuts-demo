@@ -28,7 +28,7 @@
   class="FileItem"
   on:click={onClick}
 >
-  <div class="title">{note.title}</div>
+  <div class="title" title={note.title}>{note.title}</div>
   <div class="controls">
     <Button on:click={onDeleteClick}>
       <Icon name="trash-can" />
@@ -56,6 +56,12 @@
       background-color: var(--note-list-pane--list-item--background-color--focus);
       color: var(--note-list-pane--list-item--color--focus);
     }
+  }
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .controls {
