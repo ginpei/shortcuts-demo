@@ -19,6 +19,7 @@
 
 <style lang="scss">
   :global(.dropdown--dropdown-menu-item) {
+    color: inherit;
     cursor: pointer;
     display: block;
     padding: 8px;
