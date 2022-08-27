@@ -1,0 +1,12 @@
+:root {
+  --color-link: #059;
+  --color-link--hover: #a00;
+}
+
+:link {
+  color: var(--color-link);
+  
+  &:hover {
+    color: var(--color-link--hover);
+  }
+}

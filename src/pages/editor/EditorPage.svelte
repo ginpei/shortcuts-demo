@@ -10,6 +10,7 @@
   import { editorPageStateStore,getEditorPageState } from "./editorPageStateStore";
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
+  import "../../domains/design/values.scss";
 
   const onUse: Action = () => {
     const offShortcuts = startKeyboardShortcuts(
