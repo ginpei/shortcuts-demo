@@ -73,7 +73,7 @@
 
     .NoteListItem:hover &,
     .NoteListItem.focus &,
-    .NoteListItem:focus & {
+    .NoteListItem:focus-within & {
       visibility: visible;
     }
   }
