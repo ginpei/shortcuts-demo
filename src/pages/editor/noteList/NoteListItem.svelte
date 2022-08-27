@@ -4,6 +4,7 @@
   import type { Note,NoteCallback } from "../../../domains/notes/Note";
   import { removeNoteFromState } from "../EditorPageState";
   import { editorPageStateStore } from "../editorPageStateStore";
+  import NoteListItemMenuButton from "./NoteListItemMenuButton.svelte";
 
   export let note: Note;
   export let selected: boolean;
@@ -33,6 +34,7 @@
     <Button on:click={onDeleteClick}>
       <Icon name="trash-can" />
     </Button>
+    <NoteListItemMenuButton noteId={note.id} />
   </div>
 </div>
 
@@ -65,6 +67,8 @@
   }
 
   .controls {
+    display: flex;
+    gap: 4px;
     visibility: hidden;
 
     .NoteListItem:hover &,
