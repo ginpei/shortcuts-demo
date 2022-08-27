@@ -46,7 +46,7 @@ export const editorPageShortcuts = toShortcutDefinitions([
     when: "focus:noteList-list",
   },
   {
-    command: "note:new",
+    command: "note:newAndOpen",
     key: "Alt+N",
   },
 ]);

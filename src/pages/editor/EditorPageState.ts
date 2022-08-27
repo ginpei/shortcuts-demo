@@ -44,6 +44,17 @@ export function findPrevNote(notes: Note[], noteId: string): Note | null {
   return prevNote;
 }
 
+export function addNoteToState(state: EditorPageState, note: Note): EditorPageState {
+  const notes = [...state.notes];
+  notes.push(note);
+  return {
+    ...state,
+    focusedNoteId: note.id,
+    notes,
+    selectedNoteId: note.id,
+  };
+}
+
 export function removeNoteFromState(state: EditorPageState, noteId: string): EditorPageState {
   const { focusedNoteId, notes, selectedNoteId } = state;
   const newNotes = notes.filter((v) => v.id !== noteId);

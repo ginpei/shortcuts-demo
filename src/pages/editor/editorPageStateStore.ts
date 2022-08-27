@@ -1,7 +1,7 @@
 import type { Note } from "src/domains/notes/Note";
 import { get, writable } from "svelte/store";
 import { getUserNotes } from "../../domains/notes/noteDb";
-import { createEditorPageState, type EditorPageState } from "./EditorPageState";
+import { addNoteToState, createEditorPageState, type EditorPageState } from "./EditorPageState";
 
 export const editorPageStateStore = writable<EditorPageState>(createEditorPageState());
 
@@ -47,8 +47,7 @@ export function setNoteState(note: Note): void {
 }
 
 export function addNoteState(note: Note): void {
-  editorPageStateStore.update((values) => {
-    values.notes.push(note);
-    return values;
-  });
+  editorPageStateStore.update((values) =>
+    addNoteToState(values, note)
+  );
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from "svelte";
   import { setFocus } from "../../../../src/domains/focus/focusManager";
   import type { Note } from "../../../../src/domains/notes/Note";
   import { scrollIntoView } from "../../../domains/positioning/scrollHandlers";
@@ -13,10 +14,14 @@
     const { focusedNoteId } = $editorPageStateStore;
     if (focusedNoteId !== lastFocusedNoteId) {
       lastFocusedNoteId = focusedNoteId;
-      const el = items[focusedNoteId];
-      if (el) {
-        scrollIntoView(el);
-      }
+
+      // wait for new item inserted
+      tick().then(() => {
+        const el = items[focusedNoteId];
+        if (el) {
+          scrollIntoView(el);
+        }
+      });
     }
   }
 

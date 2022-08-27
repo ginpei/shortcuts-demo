@@ -4,7 +4,7 @@
   import { execEditorPageCommand } from "../commands/editorPageCommands";
 
   function onAddClick() {
-    execEditorPageCommand('note:new');
+    execEditorPageCommand('note:newAndOpen');
   }
 </script>
 

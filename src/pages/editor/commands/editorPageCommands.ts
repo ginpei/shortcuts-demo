@@ -18,7 +18,7 @@ export const editorPageCommands = toCommandDefinitions([
   
       addNoteState(note);
     },
-    command: "note:new",
+    command: "note:newAndOpen",
     title: "Create a new note",
   },
   {
