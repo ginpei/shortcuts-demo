@@ -11,6 +11,7 @@
   import FileListPane from "./noteList/NoteListPane.svelte";
   import ToolbarPane from "./toolbar/ToolbarPane.svelte";
   import "../../domains/design/values.scss";
+	import KeyboardShortcutDialog from "./misc/KeyboardShortcutDialog.svelte";
 
   const onUse: Action = () => {
     const offShortcuts = startKeyboardShortcuts(
@@ -39,6 +40,9 @@
   <div class="pane" style="grid-area: canvas">
     <CanvasPane />
   </div>
+  <KeyboardShortcutDialog
+    open={$editorPageStateStore.showKeyboardShortcutList}
+  />
 </div>
 
 <style lang="scss">

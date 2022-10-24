@@ -2,6 +2,10 @@ import type { KeyboardShortcut } from "src/domains/keyboard/KeyboardShortcut";
 
 export const editorPageShortcuts = toShortcutDefinitions([
   {
+    command: "showKeyboardShortcutList",
+    key: "Shift+?",
+  },
+  {
     command: "showCommandPalette",
     key: "Ctrl+Shift+P",
   },

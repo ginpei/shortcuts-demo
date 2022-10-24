@@ -4,11 +4,25 @@ import { execCommand } from "../../../domains/commands/commands";
 import { setFocus } from "../../../domains/focus/focusManager";
 import { createNote } from "../../../domains/notes/Note";
 import { findNextNote, findPrevNote, removeNoteFromState } from "../EditorPageState";
-import { addNoteState, editorPageStateStore, getEditorPageState } from "../editorPageStateStore";
+import { addNoteState, editorPageStateStore, getEditorPageState, toggleKeyboardShortcutList } from "../editorPageStateStore";
 
 export type EditorPageCommandType = typeof editorPageCommands[number]['command'];
 
 export const editorPageCommands = toCommandDefinitions([
+  {
+    action: () => {
+      toggleKeyboardShortcutList(true);
+    },
+    command: "showKeyboardShortcutList",
+    title: "Show keyboard shortcut list",
+  },
+  {
+    action: () => {
+      toggleKeyboardShortcutList(false);
+    },
+    command: "closeKeyboardShortcutList",
+    title: "Close keyboard shortcut list",
+  },
   {
     action: () => {
       const command = window.prompt("Command", "showKeyboardShortcutList");

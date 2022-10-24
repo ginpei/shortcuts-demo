@@ -5,6 +5,7 @@ export interface EditorPageState {
   focusedNoteId: string;
   notes: Note[];
   selectedNoteId: string;
+  showKeyboardShortcutList: boolean;
 }
 
 export function createEditorPageState(): EditorPageState {
@@ -13,6 +14,7 @@ export function createEditorPageState(): EditorPageState {
     focusedNoteId: "",
     notes: [],
     selectedNoteId: "",
+    showKeyboardShortcutList: false,
   };
 }
 
