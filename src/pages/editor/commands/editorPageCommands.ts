@@ -11,6 +11,19 @@ export type EditorPageCommandType = typeof editorPageCommands[number]['command']
 export const editorPageCommands = toCommandDefinitions([
   {
     action: () => {
+      const command = window.prompt("Command", "showKeyboardShortcutList");
+      if (!command) {
+        return;
+      }
+
+      // TODO
+      execEditorPageCommand((command as any));
+    },
+    command: "showCommandPalette",
+    title: "Show command palette",
+  },
+  {
+    action: () => {
       const note = createNote({
         id: Math.random().toFixed(32).slice(2),
         title: "New note",

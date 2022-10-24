@@ -14,6 +14,10 @@ export async function initEditorPageStateStore() {
   setEditorPageNotes(notes);
 }
 
+export function toggleKeyboardShortcutList(show: boolean): void {
+  editorPageStateStore.update((v) => ({ ...v, showKeyboardShortcutList: show }));
+}
+
 export function setEditorPageNotes(notes: Note[]) {
   editorPageStateStore.update((values) => {
     const focusedNoteId = notes.some((v) => values.focusedNoteId === v.id)
